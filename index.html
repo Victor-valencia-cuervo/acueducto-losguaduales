@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="theme-color" content="#1565C0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Acueducto Los Guaduales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/materials.css">
+  <link rel="stylesheet" href="css/print.css">
+  <style>
+  .ts-balance-card{background:linear-gradient(135deg,#0D47A1,#1565C0,#1E88E5);border-radius:var(--radius-lg);padding:24px 20px 28px;color:white;position:relative;overflow:hidden}
+  .ts-balance-card::before{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.08)}
+  .ts-balance-label{font-size:12px;opacity:0.8;margin-bottom:4px}
+  .ts-balance-amount{font-size:32px;font-weight:900;letter-spacing:-0.5px}
+  .ts-balance-sub{font-size:11px;opacity:0.7;margin-top:2px}
+  .ts-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+  .ts-action-btn{background:var(--surface);border-radius:var(--radius);padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow);transition:all var(--transition)}
+  .ts-action-btn:active{transform:scale(0.97);box-shadow:var(--shadow-md)}
+  .ts-action-icon{font-size:24px}
+  .ts-action-label{font-size:11px;font-weight:700;color:var(--text)}
+  .gallery-filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+  .gallery-filters::-webkit-scrollbar{display:none}
+  .gf-chip{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer;border:1.5px solid var(--border);color:var(--text-2);background:var(--surface);transition:all var(--transition)}
+  .gf-chip.active{background:var(--primary);color:white;border-color:var(--primary)}
+  .gallery-card{min-width:160px;height:110px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;cursor:pointer;scroll-snap-align:start;position:relative;background:var(--primary-bg);box-shadow:var(--shadow)}
+  .gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s}
+  .gallery-card:active img{transform:scale(1.05)}
+  .gallery-card-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 8px;color:white}
+  .gallery-card-caption .gc-title{font-size:11px;font-weight:700;display:block}
+  .gallery-card-caption .gc-tag{font-size:9px;opacity:0.85;display:block}
+  .ob-illustration{font-size:80px}
+  .ob-dots{display:flex;gap:8px;justify-content:center}
+  .ob-dot{width:24px;height:4px;border-radius:2px;background:var(--border);transition:all 0.3s}
+  .ob-dot.active{background:var(--primary);width:32px}
+  .ob-title{font-size:22px;font-weight:800;color:var(--text)}
+  .ob-desc{font-size:14px;color:var(--text-2);line-height:1.7;max-width:280px;text-align:center}
+  .informe-period-toggle{display:flex;background:var(--bg);border-radius:var(--radius);padding:4px;gap:4px;margin-bottom:14px}
+  .ipt-btn{flex:1;padding:10px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all var(--transition);color:var(--text-2)}
+  .ipt-btn.active{background:var(--primary);color:white;box-shadow:var(--shadow)}
+  .year-item{background:var(--surface);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);cursor:pointer}
+  .year-item:active{box-shadow:var(--shadow-md)}
+  .yi-year{font-size:18px;font-weight:800;color:var(--primary)}
+  .yi-meta{font-size:12px;color:var(--text-2)}
+  .rte-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .rte-btn{padding:5px 10px;border-radius:6px;font-size:12px;font-weight:700;background:var(--bg);border:1px solid var(--border);cursor:pointer;transition:all var(--transition)}
+  .rte-btn:active{background:var(--primary-bg);border-color:var(--primary)}
+  .rte-content{min-height:120px;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:12px;font-size:14px;line-height:1.7;outline:none}
+  .rte-content:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(21,101,192,0.12)}
+  .destacado-card{background:var(--surface);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer}
+  .destacado-nav{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .destacado-nav-btn{background:var(--primary-bg);color:var(--primary);border:none;border-radius:50%;width:34px;height:34px;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .wa-row{display:flex;gap:8px}
+  .wa-btn-item{flex:1;background:#25D366;color:white;border:none;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;justify-content:center}
+  .sms-btn-item{flex:1;background:#5C6BC0;color:white;border:none;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;justify-content:center}
+  .email-btn-item{flex:1;background:#EF5350;color:white;border:none;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;justify-content:center}
+  .ntf-list{display:flex;flex-direction:column;gap:8px}
+  </style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash-screen">
+  <span class="splash-icon">💧</span>
+  <div class="splash-title">Acueducto Los Guaduales</div>
+  <div class="splash-sub">"la semilla del futuro"</div>
+  <div class="splash-loader"></div>
+</div>
+
+<!-- LOADING -->
+<div id="loading-overlay"><div class="three-body"><div class="three-body__dot"></div><div class="three-body__dot"></div><div class="three-body__dot"></div></div></div>
+<div id="loading-transition"><div class="lt-inner"><div class="lt-spinner"></div><div class="lt-text">Cargando...</div></div></div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="main-drawer">
+  <div class="drawer-header" style="position:relative;">
+    <div class="drawer-logo">💧</div>
+    <div class="drawer-title">Acueducto Los Guaduales</div>
+    <div class="drawer-sub">"la semilla del futuro" · v1.0</div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+      <span style="font-size:12px;color:var(--text-2);" id="drawer-role-label">Visitante</span>
+      <span style="font-size:15px;font-weight:700;" id="drawer-name-label">Público</span>
+    </div>
+  </div>
+  <div class="drawer-section">
+    <div class="dark-mode-toggle">
+      <div style="display:flex;align-items:center;gap:12px;"><span class="drawer-item-icon">🌙</span><span style="font-size:14px;font-weight:500;color:var(--text);">Modo Oscuro</span></div>
+      <label class="toggle-switch"><input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode(this.checked)"><span class="toggle-slider"></span></label>
+    </div>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-item" onclick="closeDrawer();navigateTo('home')"><span class="drawer-item-icon">🏠</span><span class="drawer-item-text">Inicio</span></div>
+    <div class="drawer-item" onclick="closeDrawer();navigateTo('about')"><span class="drawer-item-icon">ℹ️</span><span class="drawer-item-text">Acerca de la App</span></div>
+    <div class="drawer-item" onclick="closeDrawer();navigateTo('galeria')"><span class="drawer-item-icon">🖼️</span><span class="drawer-item-text">Galería Completa</span></div>
+    <div class="drawer-item" onclick="closeDrawer();navigateTo('encuesta')"><span class="drawer-item-icon">📊</span><span class="drawer-item-text">Encuestas</span></div>
+  </div>
+  <div class="drawer-section" id="drawer-admin-section" style="display:none;">
+    <div class="drawer-item" onclick="closeDrawer();navigateTo('admin')"><span class="drawer-item-icon">⚙️</span><span class="drawer-item-text">Panel Admin</span></div>
+    <div class="drawer-item" onclick="editAdminProfile()"><span class="drawer-item-icon">👤</span><span class="drawer-item-text">Editar mi Perfil</span></div>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-item" onclick="compartirApp('whatsapp')"><span class="drawer-item-icon">📱</span><span class="drawer-item-text">Compartir por WhatsApp</span></div>
+    <div class="drawer-item" onclick="compartirApp('qr')"><span class="drawer-item-icon">📷</span><span class="drawer-item-text">Ver QR de la App</span></div>
+    <div class="drawer-item" onclick="recargarNotificaciones()"><span class="drawer-item-icon">🔔</span><span class="drawer-item-text">Recargar Notificaciones</span></div>
+  </div>
+  <div class="drawer-section" id="drawer-logout-section" style="display:none;">
+    <div class="drawer-item" onclick="closeDrawer();logout()" style="color:var(--danger);"><span class="drawer-item-icon">🚪</span><span class="drawer-item-text">Cerrar Sesión</span></div>
+  </div>
+  <div style="padding:20px;text-align:center;font-size:11px;color:var(--text-3);">Acueducto Los Guaduales · NIT. 890984417-9<br>Vereda Loma de Don Santos · Santa Bárbara, Antioquia</div>
+</div>
+
+<!-- SURVEY FLOAT -->
+<div class="survey-float-card" id="survey-float" style="display:none;" onclick="navigateTo('encuesta')">
+  <button class="survey-float-dismiss" onclick="event.stopPropagation();document.getElementById('survey-float').style.display='none'">✕</button>
+  <span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="m256 8c-136.957 0-248 111.083-248 248 0 136.997 111.043 248 248 248s248-111.003 248-248c0-136.917-111.043-248-248-248zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12z"/></svg>
+    <p>¡Encuestas disponibles!<br>Participa ahora.</p>
+  </span>
+</div>
+
+<!-- TOAST -->
+<div id="toast-container"></div>
+<!-- PRINT -->
+<div id="print-area" style="display:none;"></div>
+
+<div id="app">
+<!-- ═══ HEADER ═══ -->
+<header id="app-header">
+  <button class="header-back" id="header-back-btn" onclick="historyBack()">←</button>
+  <span class="header-logo" id="header-logo">💧</span>
+  <span class="header-title" id="header-title">Acueducto Los Guaduales</span>
+  <div class="header-actions">
+    <span id="header-user-name" style="display:none;font-size:12px;color:var(--primary);font-weight:600;"></span>
+    <button class="header-btn edit-btn" id="btn-edit-home" style="display:none;" onclick="navigateTo('admin')" title="Editar inicio">✏️</button>
+    <button class="header-btn" id="btn-header-login" onclick="openLoginModal()" title="Iniciar sesión">🔐</button>
+    <input id="burger-checkbox" type="checkbox" onchange="toggleDrawer(this.checked)">
+    <label class="burger" for="burger-checkbox"><span></span><span></span><span></span></label>
+  </div>
+</header>
+
+<!-- ═══ INICIO ═══ -->
+<section class="screen active" id="screen-home">
+  <div class="home-hero">
+    <div class="home-droplets">💧</div>
+    <div class="home-greeting" id="home-greeting">Bienvenido</div>
+    <div class="home-name" id="home-name">Acueducto Los Guaduales</div>
+    <div class="home-sub" id="home-sub-greeting">"la semilla del futuro"</div>
+  </div>
+  <div style="padding:14px 16px 0;">
+    <div class="section-header">
+      <span class="section-title">📢 Noticias y Avisos</span>
+      <span id="home-more-btn" style="font-size:12px;color:var(--primary);cursor:pointer;display:none;" onclick="toggleMoreNotifs()">Ver más</span>
+    </div>
+    <div id="home-notifications" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+  <div style="padding:14px 16px 0;">
+    <div class="section-header">
+      <span class="section-title">🖼️ Galería</span>
+      <span style="font-size:12px;color:var(--primary);cursor:pointer;" onclick="navigateTo('galeria')">Ver todo</span>
+    </div>
+    <div class="gallery-filters" id="home-gallery-filters">
+      <div class="gf-chip active" onclick="filterGallery('todos',this)">Todos</div>
+      <div class="gf-chip" onclick="filterGallery('proyectos',this)">Proyectos</div>
+      <div class="gf-chip" onclick="filterGallery('eventos',this)">Eventos</div>
+      <div class="gf-chip" onclick="filterGallery('destacado',this)">Destacado</div>
+      <div class="gf-chip" onclick="filterGallery('otros',this)">Otros</div>
+    </div>
+    <div id="home-gallery" class="gallery-scroll" style="margin-top:10px;"></div>
+  </div>
+  <div style="padding:14px 16px 0;" id="home-destacado-section">
+    <div class="section-header"><span class="section-title">📌 Destacados</span></div>
+    <div id="home-destacado-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+  <div style="padding:14px 16px 0;" id="home-video-section">
+    <div class="section-header"><span class="section-title">🎬 Video Destacado</span></div>
+    <div id="home-video-container"></div>
+  </div>
+  <div style="height:20px;"></div>
+  <div id="home-edit-fab" style="display:none;position:fixed;bottom:calc(var(--nav-h)+16px);right:16px;z-index:50;">
+    <button class="btn-fab" onclick="navigateTo('admin')" style="width:44px;height:44px;font-size:18px;">✏️</button>
+  </div>
+</section>
+
+<!-- ═══ CONSULTAS ═══ -->
+<section class="screen" id="screen-consultas">
+  <div class="screen-content">
+    <div id="consultas-onboarding">
+      <div id="ob-slide-0" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 8px;gap:16px;">
+        <div class="ob-illustration">🔍</div>
+        <div class="ob-dots"><div class="ob-dot active"></div><div class="ob-dot"></div></div>
+        <div class="ob-title">Consultas de Asociados</div>
+        <div class="ob-desc">Con esta función puedes consultar el estado de tus facturas, recibos de pago y notificaciones personales del acueducto.</div>
+        <button class="btn btn-primary btn-lg btn-full" onclick="goToObSlide(1)">Siguiente →</button>
+      </div>
+      <div id="ob-slide-1" style="display:none;flex-direction:column;align-items:center;text-align:center;padding:24px 8px;gap:16px;">
+        <div class="ob-illustration">💳</div>
+        <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot active"></div></div>
+        <div class="ob-title">¿Cómo funciona?</div>
+        <div class="ob-desc">Solo necesitas tu número de documento de identidad. No se requiere contraseña. Tu información es privada y segura.</div>
+        <button class="btn btn-primary btn-lg btn-full" onclick="goToConsultasLogin()">Continuar →</button>
+        <button class="btn btn-outline btn-full" onclick="goToObSlide(0)">← Anterior</button>
+      </div>
+    </div>
+    <div id="consultas-login-section" style="display:none;">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:48px;">🔎</div>
+        <div style="font-size:18px;font-weight:800;color:var(--text);">Consultar mi Cuenta</div>
+        <div style="font-size:13px;color:var(--text-2);margin-top:4px;">Ingresa tu número de documento</div>
+      </div>
+      <div class="consultas-login-form">
+        <div class="input-block" style="position:relative;margin-bottom:20px;">
+          <input class="input" type="text" id="consultas-documento" placeholder=" " required style="width:100%;padding:14px 12px 6px;border:none;border-bottom:2px solid var(--border);background:transparent;font-size:15px;outline:none;color:var(--text);">
+          <label for="consultas-documento" style="position:absolute;top:14px;left:12px;font-size:15px;color:var(--text-3);pointer-events:none;transition:all 0.2s;">Número de documento</label>
+        </div>
+        <div id="consultas-error" style="color:var(--danger);font-size:12px;margin:-8px 0 8px;text-align:center;min-height:16px;"></div>
+        <div style="text-align:right;margin-bottom:12px;">
+          <span class="consultas-login-form .forgot-link" style="font-size:12px;color:var(--primary);text-decoration:underline;cursor:pointer;" onclick="showAlert('Ayuda 💡','Tu número de documento ES tu usuario. No necesitas contraseña para consultas básicas.','info')">¿Necesitas ayuda?</span>
+        </div>
+        <button type="button" onclick="buscarAsociado()" style="width:100%;padding:13px;background:linear-gradient(135deg,#1565C0,#1E88E5);color:white;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;">🔍 Buscar mi cuenta</button>
+      </div>
+      <button class="btn btn-outline btn-full" style="margin-top:12px;" onclick="goToObSlide(0)">← Volver</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VISTA ASOCIADO ═══ -->
+<section class="screen" id="screen-asociado-view">
+  <div class="av-header" style="position:relative;">
+    <div class="av-avatar" id="av-avatar-letter">A</div>
+    <div class="av-name" id="av-nombre">Asociado</div>
+    <div class="av-doc" id="av-doc">Doc: —</div>
+    <div class="av-notif-btn-wrap">
+      <button class="av-notif-btn" onclick="toggleNotifPanel()">🔔</button>
+      <span id="av-notif-badge" style="display:none;"></span>
+    </div>
+  </div>
+  <div class="screen-content">
+    <div class="notif-toggle-btn" onclick="toggleNotifPanel()">
+      <span>🔔 Mis Notificaciones</span>
+      <span id="av-notif-count" style="font-size:12px;color:var(--text-2);">0 nuevas</span>
+    </div>
+    <div id="av-notif-panel" class="ntf-list"></div>
+    <div class="av-stats">
+      <div class="av-stat"><div class="av-stat-val danger" id="av-pendientes">0</div><div class="av-stat-label">Pendientes</div></div>
+      <div class="av-stat"><div class="av-stat-val" id="av-pagadas">0</div><div class="av-stat-label">Pagadas</div></div>
+      <div class="av-stat"><div class="av-stat-val danger" id="av-total-deuda">$0</div><div class="av-stat-label">Por pagar</div></div>
+    </div>
+    <div class="section-header"><span class="section-title">📄 Mis Facturas</span></div>
+    <div id="av-facturas-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</section>
+
+<!-- ═══ TESORERÍA ═══ -->
+<section class="screen" id="screen-tesoreria">
+  <div class="screen-content">
+    <div class="ts-balance-card">
+      <div class="ts-balance-label">Saldo actual</div>
+      <div class="ts-balance-amount" id="ts-balance">$0</div>
+      <div class="ts-balance-sub">Ingresos − Egresos registrados</div>
+    </div>
+    <div class="ts-actions">
+      <div class="ts-action-btn" onclick="navigateTo('entradas')"><div class="ts-action-icon">↑</div><div class="ts-action-label">Entradas</div></div>
+      <div class="ts-action-btn" onclick="navigateTo('salidas')"><div class="ts-action-icon">↓</div><div class="ts-action-label">Salidas</div></div>
+      <div class="ts-action-btn" onclick="navigateTo('informes')"><div class="ts-action-icon">📊</div><div class="ts-action-label">Informes</div></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Total facturas</div><div class="stat-value" id="ts-facturas-total">0</div></div>
+      <div class="stat-card"><div class="stat-label">Pendientes</div><div class="stat-value warning" id="ts-facturas-pendientes">0</div></div>
+      <div class="stat-card"><div class="stat-label">Pagadas</div><div class="stat-value success" id="ts-facturas-pagadas">0</div></div>
+      <div class="stat-card"><div class="stat-label">Total cobrado</div><div class="stat-value" id="ts-cobrado">$0</div></div>
+      <div class="stat-card full"><div class="stat-label">Total pendiente por cobrar</div><div class="stat-value danger" id="ts-pendiente">$0</div></div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item" onclick="navigateTo('tesoreria-asociados')"><div class="menu-icon">👥</div><div class="menu-label">Asociados</div><div class="menu-sublabel">Gestionar</div></div>
+      <div class="menu-item" onclick="navigateTo('tesoreria-facturas')"><div class="menu-icon">📄</div><div class="menu-label">Facturas</div><div class="menu-sublabel">Ver y crear</div></div>
+      <div class="menu-item" onclick="navigateTo('tesoreria-recibos')"><div class="menu-icon">🧾</div><div class="menu-label">Recibos</div><div class="menu-sublabel">Pagos</div></div>
+      <div class="menu-item" onclick="navigateTo('factura-nueva')"><div class="menu-icon">➕</div><div class="menu-label">Nueva Factura</div><div class="menu-sublabel">Crear</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENTRADAS ═══ -->
+<section class="screen" id="screen-entradas">
+  <div class="screen-content">
+    <div class="ie-summary">
+      <div class="ie-stat ingresos"><div class="ie-label ingresos">Total Entradas</div><div class="ie-val ingresos" id="ent-total">$0</div></div>
+      <div class="ie-stat balance"><div class="ie-label balance">Registros</div><div class="ie-val balance" id="ent-count">0</div></div>
+    </div>
+    <div id="ent-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+  <button class="btn-fab" onclick="openFormIE('ingreso')">+</button>
+</section>
+
+<!-- ═══ SALIDAS ═══ -->
+<section class="screen" id="screen-salidas">
+  <div class="screen-content">
+    <div class="ie-summary">
+      <div class="ie-stat egresos"><div class="ie-label egresos">Total Salidas</div><div class="ie-val egresos" id="sal-total">$0</div></div>
+      <div class="ie-stat balance"><div class="ie-label balance">Registros</div><div class="ie-val balance" id="sal-count">0</div></div>
+    </div>
+    <div id="sal-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+  <button class="btn-fab" onclick="openFormIE('egreso')" style="background:var(--danger);">+</button>
+</section>
+
+<!-- ═══ INFORMES ═══ -->
+<section class="screen" id="screen-informes">
+  <div class="screen-content">
+    <div class="informe-period-toggle">
+      <div class="ipt-btn active" id="ipt-anual" onclick="switchInformePeriod('anual')">📅 Anual</div>
+      <div class="ipt-btn" id="ipt-mensual" onclick="switchInformePeriod('mensual')">🗓️ Mensual</div>
+    </div>
+    <div id="informes-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</section>
+
+<!-- ═══ LISTA ASOCIADOS ═══ -->
+<section class="screen" id="screen-tesoreria-asociados">
+  <div class="screen-content">
+    <div class="search-box"><input type="text" class="form-input" id="asociados-search" placeholder="Buscar por nombre o documento..."></div>
+    <div id="asociados-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+  <button class="btn-fab" onclick="openFormAsociado()">+</button>
+</section>
+
+<!-- ═══ LISTA FACTURAS ═══ -->
+<section class="screen" id="screen-tesoreria-facturas">
+  <div class="screen-content">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-sm btn-outline" onclick="filterFacturas('')">Todas</button>
+      <button class="btn btn-sm btn-outline" onclick="filterFacturas('pendiente')">⏳ Pendientes</button>
+      <button class="btn btn-sm btn-outline" onclick="filterFacturas('pagada')">✅ Pagadas</button>
+      <button class="btn btn-sm btn-outline" onclick="filterFacturas('vencida')">⏰ Vencidas</button>
+    </div>
+    <div id="facturas-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+  <button class="btn-fab" onclick="navigateTo('factura-nueva')">+</button>
+</section>
+
+<!-- ═══ NUEVA FACTURA ═══ -->
+<section class="screen" id="screen-factura-nueva">
+  <div class="screen-content">
+    <input type="hidden" id="nf-id">
+    <div class="card">
+      <div class="card-header"><span class="card-icon">📄</span><div><div class="card-title">Datos de Factura</div></div></div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">N° Factura *</label><input type="text" class="form-input" id="nf-numero" placeholder="FAC-0001"></div>
+          <div class="form-group"><label class="form-label">Fecha Emisión</label><input type="date" class="form-input" id="nf-fecha-emision"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Asociado *</label><select class="form-input" id="nf-asociado"><option value="">— Seleccionar —</option></select></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Mes *</label><select class="form-input" id="nf-mes"><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select></div>
+          <div class="form-group"><label class="form-label">Año</label><input type="number" class="form-input" id="nf-anio" value="2026" min="2020" max="2099"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-icon">💧</span><div class="card-title">Lectura del Medidor</div></div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-group"><label class="form-label">Fecha Lectura</label><input type="date" class="form-input" id="nf-fecha-lectura"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Anterior (m³)</label><input type="number" class="form-input" id="nf-anterior" step="0.001" value="0"></div>
+          <div class="form-group"><label class="form-label">Actual (m³)</label><input type="number" class="form-input" id="nf-actual" step="0.001" value="0"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="calc-label">Consumo calculado</label><div class="calc-display" id="nf-consumo-m3">0.000 m³</div></div>
+          <div class="form-group"><label class="calc-label">Valor consumo</label><div class="calc-display" id="nf-valor-consumo">$ 0</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-icon">💰</span><div class="card-title">Detalle del Cobro</div></div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Tarifa m³ ($)</label><input type="number" class="form-input" id="nf-tarifa" value="2400"></div>
+          <div class="form-group"><label class="form-label">Administración ($)</label><input type="number" class="form-input" id="nf-admin" value="28000"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Cobros adicionales ($)</label><input type="number" class="form-input" id="nf-cobros-adicionales" value="0"></div>
+          <div class="form-group"><label class="form-label">m³ adicionales</label><input type="number" class="form-input" id="nf-m3-adicionales" step="0.001" value="0"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Fecha límite</label><input type="date" class="form-input" id="nf-fecha-limite"></div>
+          <div class="form-group"><label class="calc-label">m³ total</label><div class="calc-display" id="nf-consumo">0 m³</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--primary);color:white;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:700;">VALOR TOTAL A PAGAR</span>
+        <span style="font-size:24px;font-weight:900;" id="nf-valor-total">$ 0</span>
+      </div>
+    </div>
+    <div class="card"><div class="form-group"><label class="form-label">Notas adicionales</label><textarea class="form-input" id="nf-notas" rows="3" placeholder="Observaciones..."></textarea></div></div>
+    <div class="action-row">
+      <button class="btn btn-outline" onclick="navigateTo('tesoreria-facturas')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveFactura()">💾 Guardar</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VER FACTURA ═══ -->
+<section class="screen" id="screen-factura-ver">
+  <div class="screen-content">
+    <input type="hidden" id="vf-factura-id">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+      <span id="vf-factura-num" style="font-size:16px;font-weight:800;color:var(--primary);"></span>
+      <span id="vf-estado" class="status-badge"></span>
+    </div>
+    <div id="factura-print-container"></div>
+    <div id="vf-acciones" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</section>
+
+<!-- ═══ LISTA RECIBOS ═══ -->
+<section class="screen" id="screen-tesoreria-recibos">
+  <div class="screen-content">
+    <div id="recibos-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+  <button class="btn-fab" onclick="navigateTo('recibo-nuevo')">+</button>
+</section>
+
+<!-- ═══ NUEVO RECIBO ═══ -->
+<section class="screen" id="screen-recibo-nuevo">
+  <div class="screen-content">
+    <input type="hidden" id="nr-id">
+    <div class="card">
+      <div class="card-header"><span class="card-icon">🧾</span><div class="card-title">Nuevo Recibo de Pago</div></div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">N° Recibo</label><input type="text" class="form-input" id="nr-numero" placeholder="REC-0001"></div>
+          <div class="form-group"><label class="form-label">Fecha Pago</label><input type="date" class="form-input" id="nr-fecha"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Asociado *</label><select class="form-input" id="nr-asociado"><option value="">— Seleccionar —</option></select></div>
+        <div class="form-group"><label class="form-label">Concepto</label><input type="text" class="form-input" id="nr-concepto" placeholder="Pago servicio de agua"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Mes</label><select class="form-input" id="nr-mes"><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select></div>
+          <div class="form-group"><label class="form-label">Año</label><input type="number" class="form-input" id="nr-anio" value="2026"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">m³ consumidos</label><input type="number" class="form-input" id="nr-m3" step="0.001" value="0"></div>
+          <div class="form-group"><label class="form-label">Tipo de pago</label><select class="form-input" id="nr-tipo-pago"><option value="efectivo">Efectivo</option><option value="transferencia">Transferencia</option><option value="consignacion">Consignación</option><option value="otro">Otro</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Administración ($)</label><input type="number" class="form-input" id="nr-admin" value="28000"></div>
+          <div class="form-group"><label class="form-label">Multa ($)</label><input type="number" class="form-input" id="nr-multa" value="0"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Valor extra ($)</label><input type="number" class="form-input" id="nr-extra" value="0"></div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--primary);color:white;"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:700;">VALOR TOTAL</span><span style="font-size:22px;font-weight:900;" id="nr-total">$ 0</span></div></div>
+    <div class="card"><div class="form-group"><label class="form-label">Notas</label><textarea class="form-input" id="nr-notas" rows="2" placeholder="Observaciones..."></textarea></div></div>
+    <div class="action-row">
+      <button class="btn btn-outline" onclick="navigateTo('tesoreria-recibos')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveRecibo()">💾 Guardar</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VER RECIBO ═══ -->
+<section class="screen" id="screen-recibo-ver">
+  <div class="screen-content">
+    <input type="hidden" id="vr-recibo-id">
+    <div style="display:flex;align-items:center;justify-content:space-between;"><span id="vr-recibo-num" style="font-size:16px;font-weight:800;color:var(--primary);"></span><span class="status-badge status-pagada">Pagado</span></div>
+    <div id="recibo-print-container"></div>
+    <div id="vr-acciones" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</section>
+
+<!-- ═══ MEDIDORES ═══ -->
+<section class="screen" id="screen-medidores">
+  <div class="screen-content">
+    <div class="card"><div class="card-header"><span class="card-icon">💧</span><div><div class="card-title">Control de Medidores</div><div class="card-subtitle">Última lectura por asociado. Toca para nueva factura.</div></div></div></div>
+    <div id="medidores-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+  <button class="btn-fab" onclick="navigateTo('factura-nueva')">+</button>
+</section>
+
+<!-- ═══ ENCUESTAS ═══ -->
+<section class="screen" id="screen-encuesta">
+  <div class="screen-content">
+    <div class="card"><div class="card-header"><span class="card-icon">📊</span><div><div class="card-title">Encuestas</div><div class="card-subtitle">Participa y da tu opinión</div></div></div></div>
+    <div id="encuestas-list" style="display:flex;flex-direction:column;gap:14px;"></div>
+    <div id="admin-encuesta-panel" style="display:none;">
+      <div class="divider" style="margin:8px 0;"></div>
+      <button class="btn btn-primary btn-full" onclick="openFormEncuesta()">➕ Crear Encuesta</button>
+      <div id="admin-encuestas-list" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALERÍA ═══ -->
+<section class="screen" id="screen-galeria">
+  <div class="screen-content">
+    <div class="gallery-filters">
+      <div class="gf-chip active" onclick="filterGalleryFull('todos',this)">Todos</div>
+      <div class="gf-chip" onclick="filterGalleryFull('proyectos',this)">Proyectos</div>
+      <div class="gf-chip" onclick="filterGalleryFull('eventos',this)">Eventos</div>
+      <div class="gf-chip" onclick="filterGalleryFull('destacado',this)">Destacado</div>
+      <div class="gf-chip" onclick="filterGalleryFull('otros',this)">Otros</div>
+    </div>
+    <div id="galeria-grid" class="gallery-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ ADMIN ═══ -->
+<section class="screen" id="screen-admin">
+  <div class="screen-content">
+    <div class="card"><div class="card-header"><span class="card-icon">⚙️</span><div class="card-title">Panel de Administración</div></div></div>
+    <div class="section-header"><span class="section-title">✏️ Editar Inicio</span></div>
+    <div class="menu-grid">
+      <div class="menu-item" onclick="navigateTo('admin-galeria')"><div class="menu-icon">🖼️</div><div class="menu-label">Galería</div><div class="menu-sublabel">Imágenes</div></div>
+      <div class="menu-item" onclick="navigateTo('admin-notificaciones')"><div class="menu-icon">🔔</div><div class="menu-label">Notificaciones</div><div class="menu-sublabel">Avisos</div></div>
+      <div class="menu-item" onclick="navigateTo('admin-contenido')"><div class="menu-icon">📌</div><div class="menu-label">Destacados</div><div class="menu-sublabel">Texto enriquecido</div></div>
+      <div class="menu-item" onclick="openVideoAdmin()"><div class="menu-icon">🎬</div><div class="menu-label">Video</div><div class="menu-sublabel">Destacado</div></div>
+    </div>
+    <div class="section-header" style="margin-top:8px;"><span class="section-title">🛠️ Configuración</span></div>
+    <div class="menu-grid">
+      <div class="menu-item" onclick="openConfigPanel()"><div class="menu-icon">⚙️</div><div class="menu-label">Sistema</div><div class="menu-sublabel">Tarifas y datos</div></div>
+      <div class="menu-item" onclick="navigateTo('tesoreria-asociados')"><div class="menu-icon">👥</div><div class="menu-label">Asociados</div><div class="menu-sublabel">Gestión</div></div>
+      <div class="menu-item" onclick="navigateTo('encuesta');setTimeout(()=>document.getElementById('admin-encuesta-panel').style.display='block',300)"><div class="menu-icon">📊</div><div class="menu-label">Encuestas</div><div class="menu-sublabel">Crear y gestionar</div></div>
+      <div class="menu-item" onclick="navigateTo('informes')"><div class="menu-icon">📈</div><div class="menu-label">Informes</div><div class="menu-sublabel">Reportes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ADMIN NOTIFICACIONES ═══ -->
+<section class="screen" id="screen-admin-notificaciones">
+  <div class="screen-content">
+    <button class="btn btn-primary btn-full" onclick="editNotificacion(null)">➕ Nueva Notificación</button>
+    <div id="admin-notif-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</section>
+
+<!-- ═══ ADMIN GALERÍA ═══ -->
+<section class="screen" id="screen-admin-galeria">
+  <div class="screen-content">
+    <div class="card" style="background:var(--primary-bg);">
+      <div style="font-size:12px;color:var(--primary);margin-bottom:8px;">💡 Usa <a href="https://es.imgbb.com/" target="_blank" style="color:var(--primary);font-weight:700;">imgbb.com</a> para obtener links de imágenes gratis</div>
+      <button class="btn btn-primary btn-full" onclick="openAddGaleriaModal()">➕ Agregar Imagen</button>
+    </div>
+    <div id="admin-galeria-grid" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</section>
+
+<!-- ═══ ADMIN CONTENIDO ═══ -->
+<section class="screen" id="screen-admin-contenido">
+  <div class="screen-content">
+    <button class="btn btn-primary btn-full" onclick="openFormDestacado(null)">➕ Nuevo Destacado</button>
+    <div id="admin-contenido-list" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;"></div>
+  </div>
+</section>
+
+<!-- ═══ ACERCA DE ═══ -->
+<section class="screen" id="screen-about">
+  <div class="about-hero">
+    <div class="about-logo">💧</div>
+    <div class="about-title">Acueducto Los Guaduales</div>
+    <div class="about-slogan">"la semilla del futuro"</div>
+  </div>
+  <div class="screen-content">
+    <div class="about-section"><h3>📱 Sobre esta aplicación</h3><p>Esta aplicación fue diseñada para facilitar la administración del Acueducto Los Guaduales, modernizando los procesos de gestión del servicio de agua en la Vereda Loma de Don Santos.</p></div>
+    <div class="about-section"><h3>🎯 Objetivos</h3>
+      <div class="about-features">
+        <div class="about-feature"><span>💳</span><span>Gestionar pagos y facturas</span></div>
+        <div class="about-feature"><span>📊</span><span>Llevar control de consumos de agua</span></div>
+        <div class="about-feature"><span>💰</span><span>Registrar ingresos y egresos</span></div>
+        <div class="about-feature"><span>📢</span><span>Informar a los asociados</span></div>
+        <div class="about-feature"><span>📰</span><span>Publicar noticias y novedades</span></div>
+        <div class="about-feature"><span>🖼️</span><span>Compartir imágenes y videos</span></div>
+        <div class="about-feature"><span>📋</span><span>Realizar encuestas comunitarias</span></div>
+        <div class="about-feature"><span>🔍</span><span>Consultar pagos y facturas</span></div>
+        <div class="about-feature"><span>⚙️</span><span>Modernizar la administración</span></div>
+      </div>
+    </div>
+    <div class="about-section"><h3>ℹ️ Información del Acueducto</h3>
+      <div class="about-info"><span>Organización</span><span>J.A.C. Loma de Don Santos</span></div>
+      <div class="about-info"><span>NIT</span><span>890.984.417-9</span></div>
+      <div class="about-info"><span>Vereda</span><span>Loma de Don Santos</span></div>
+      <div class="about-info"><span>Municipio</span><span>Santa Bárbara, Antioquia</span></div>
+      <div class="about-info"><span>Administrador</span><span>Laura Valencia C.</span></div>
+      <div class="about-info"><span>Versión</span><span>1.0.0</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<nav id="bottom-nav">
+  <div class="nav-item active" data-screen="home" onclick="navigateTo('home')"><div class="nav-icon">🏠</div><div class="nav-label">Inicio</div></div>
+  <div class="nav-item nav-hidden" data-screen="tesoreria" onclick="isTesorero()?navigateTo('tesoreria'):openLoginModal()"><div class="nav-icon">💰</div><div class="nav-label">Tesorería</div></div>
+  <div class="nav-item" data-screen="consultas" onclick="navigateTo('consultas')"><div class="nav-icon">🔍</div><div class="nav-label">Consultas</div></div>
+  <div class="nav-item" data-screen="medidores" onclick="isTesorero()?navigateTo('medidores'):openLoginModal()"><div class="nav-icon">💧</div><div class="nav-label">Medidores</div></div>
+  <div class="nav-item" data-screen="encuesta" onclick="navigateTo('encuesta')"><div class="nav-icon">📊</div><div class="nav-label">Encuesta</div></div>
+  <div class="nav-item nav-hidden" data-screen="admin" onclick="navigateTo('admin')"><div class="nav-icon">✏️</div><div class="nav-label">Modificar</div></div>
+</nav>
+</div>
+
+<!-- ══════════ MODALES ══════════ -->
+<!-- Login -->
+<div class="modal center" id="modal-login">
+  <div class="modal-card" style="padding:20px;max-height:90vh;overflow-y:auto;">
+    <button style="position:absolute;top:10px;right:12px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-2);z-index:2;" onclick="closeLoginModal()">✕</button>
+    <div class="monkey-login-card" style="width:100%;box-shadow:none;padding:12px 0 0;">
+      <input class="blind-check" type="checkbox" id="blind-input" hidden>
+      <label for="blind-input" class="blind_input"><span class="hide">Ocultar</span><span class="show">Mostrar</span></label>
+      <form class="form" onsubmit="return false;">
+        <div class="title">Iniciar Sesión</div>
+        <label class="label_input" for="login-documento">Documento / Usuario</label>
+        <input spellcheck="false" class="input" type="text" id="login-documento" placeholder="admin" autocomplete="username">
+        <label class="label_input" for="ml-password">Contraseña</label>
+        <input spellcheck="false" class="input" type="text" id="ml-password" autocomplete="current-password">
+        <div id="login-error" style="color:#C62828;font-size:12px;text-align:center;min-height:16px;margin:4px 0;"></div>
+        <button class="submit" type="button" onclick="handleLogin()">Iniciar Sesión</button>
+      </form>
+      <label for="blind-input" class="avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 64 64" id="monkey">
+          <ellipse cx="53.7" cy="33" rx="8.3" ry="8.2" fill="#89664c"></ellipse><ellipse cx="53.7" cy="33" rx="5.4" ry="5.4" fill="#ffc5d3"></ellipse><ellipse cx="10.2" cy="33" rx="8.2" ry="8.2" fill="#89664c"></ellipse><ellipse cx="10.2" cy="33" rx="5.4" ry="5.4" fill="#ffc5d3"></ellipse>
+          <g fill="#89664c"><path d="m43.4 10.8c1.1-.6 1.9-.9 1.9-.9-3.2-1.1-6-1.8-8.5-2.1 1.3-1 2.1-1.3 2.1-1.3-20.4-2.9-30.1 9-30.1 19.5h46.4c-.7-7.4-4.8-12.4-11.8-15.2"></path><path d="m55.3 27.6c0-9.7-10.4-17.6-23.3-17.6s-23.3 7.9-23.3 17.6c0 2.3.6 4.4 1.6 6.4-1 2-1.6 4.2-1.6 6.4 0 9.7 10.4 17.6 23.3 17.6s23.3-7.9 23.3-17.6c0-2.3-.6-4.4-1.6-6.4 1-2 1.6-4.2 1.6-6.4"></path></g>
+          <path d="m52 28.2c0-16.9-20-6.1-20-6.1s-20-10.8-20 6.1c0 4.7 2.9 9 7.5 11.7-1.3 1.7-2.1 3.6-2.1 5.7 0 6.1 6.6 11 14.7 11s14.7-4.9 14.7-11c0-2.1-.8-4-2.1-5.7 4.4-2.7 7.3-7 7.3-11.7" fill="#e0ac7e"></path>
+          <g fill="#3b302a" class="monkey-eye-nose"><path d="m35.1 38.7c0 1.1-.4 2.1-1 2.1-.6 0-1-.9-1-2.1 0-1.1.4-2.1 1-2.1.6.1 1 1 1 2.1"></path><path d="m30.9 38.7c0 1.1-.4 2.1-1 2.1-.6 0-1-.9-1-2.1 0-1.1.4-2.1 1-2.1.5.1 1 1 1 2.1"></path><ellipse cx="40.7" cy="31.7" rx="3.5" ry="4.5" class="monkey-eye-r"></ellipse><ellipse cx="23.3" cy="31.7" rx="3.5" ry="4.5" class="monkey-eye-l"></ellipse></g>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 64 64" id="monkey-hands">
+          <path fill="#89664C" d="M9.4,32.5L2.1,61.9H14c-1.6-7.7,4-21,4-21L9.4,32.5z"></path>
+          <path fill="#FFD6BB" d="M15.8,24.8c0,0,4.9-4.5,9.5-3.9c2.3,0.3-7.1,7.6-7.1,7.6s9.7-8.2,11.7-5.6c1.8,2.3-8.9,9.8-8.9,9.8s10-8.1,9.6-4.6c-0.3,3.8-7.9,12.8-12.5,13.8C11.5,43.2,6.3,39,9.8,24.4C11.6,17,13.3,25.2,15.8,24.8"></path>
+          <path fill="#89664C" d="M54.8,32.5l7.3,29.4H50.2c1.6-7.7-4-21-4-21L54.8,32.5z"></path>
+          <path fill="#FFD6BB" d="M48.4,24.8c0,0-4.9-4.5-9.5-3.9c-2.3,0.3,7.1,7.6,7.1,7.6s-9.7-8.2-11.7-5.6c-1.8,2.3,8.9,9.8,8.9,9.8s-10-8.1-9.7-4.6c0.4,3.8,8,12.8,12.6,13.8c6.6,1.3,11.8-2.9,8.3-17.5C52.6,17,50.9,25.2,48.4,24.8"></path>
+        </svg>
+      </label>
+    </div>
+  </div>
+</div>
+<!-- Found -->
+<div class="modal center" id="modal-found">
+  <div class="modal-card">
+    <div class="found-icon">✅</div>
+    <div class="found-name" id="found-nombre"></div>
+    <div style="font-size:14px;color:var(--text-2);text-align:center;margin:4px 0 16px;">Doc: <span id="found-doc"></span></div>
+    <div style="background:var(--success-bg);border-radius:8px;padding:10px;text-align:center;font-size:13px;color:var(--success);margin-bottom:16px;font-weight:600;">✅ Asociado encontrado correctamente</div>
+    <div class="action-row">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-found').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="continueToAsociado()">Continuar →</button>
+    </div>
+  </div>
+</div>
+<!-- Not Found -->
+<div class="modal center" id="modal-not-found">
+  <div class="modal-card" style="text-align:center;">
+    <div style="font-size:48px;margin-bottom:12px;">❌</div>
+    <div style="font-size:18px;font-weight:800;color:var(--danger);margin-bottom:8px;">Asociado no encontrado</div>
+    <div style="font-size:14px;color:var(--text-2);margin-bottom:20px;">Verifique el documento ingresado.</div>
+    <button class="btn btn-primary btn-full" onclick="document.getElementById('modal-not-found').classList.remove('active')">Entendido</button>
+  </div>
+</div>
+<!-- GitHub Confirm -->
+<div class="modal center" id="modal-github-confirm">
+  <div class="modal-card">
+    <div style="font-size:20px;font-weight:800;color:var(--danger);margin-bottom:12px;" id="mgc-title">Confirmar Acción</div>
+    <div style="background:var(--danger-bg);border:1px solid #FFCDD2;border-radius:8px;padding:12px;margin-bottom:12px;"><p style="font-size:13px;color:var(--danger);" id="mgc-message">Esta acción no se puede deshacer.</p></div>
+    <div style="font-size:13px;color:var(--text-2);margin-bottom:8px;">Escriba exactamente: <code style="background:#F5F5F5;padding:2px 6px;border-radius:4px;font-weight:700;" id="mgc-confirm-text"></code></div>
+    <input type="text" class="form-input" id="mgc-input" placeholder="Escriba aquí para confirmar...">
+    <div class="action-row" style="margin-top:16px;">
+      <button class="btn btn-outline" id="mgc-btn-cancel">Cancelar</button>
+      <button class="btn" id="mgc-btn-confirm" disabled style="background:#C62828;color:white;border-radius:24px;padding:10px 20px;font-size:14px;font-weight:600;">Eliminar</button>
+    </div>
+  </div>
+</div>
+<!-- Alert -->
+<div class="modal center" id="modal-alert">
+  <div class="modal-card" style="text-align:center;">
+    <div style="font-size:36px;margin-bottom:8px;" id="modal-alert-icon">ℹ️</div>
+    <div style="font-size:17px;font-weight:800;margin-bottom:8px;" id="modal-alert-title">Aviso</div>
+    <div style="font-size:14px;color:var(--text-2);margin-bottom:20px;" id="modal-alert-message"></div>
+    <button class="btn btn-primary btn-full" id="modal-alert-btn">Entendido</button>
+  </div>
+</div>
+<!-- Factura pública -->
+<div class="modal" id="modal-factura-public">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div style="padding:0 16px 16px;">
+      <div id="factura-public-container"></div>
+      <button class="btn btn-outline btn-full" style="margin-top:12px;" onclick="document.getElementById('modal-factura-public').classList.remove('active')">Cerrar</button>
+    </div>
+  </div>
+</div>
+<!-- Imagen -->
+<div class="modal center" id="modal-image" onclick="this.classList.remove('active')">
+  <div class="modal-card" style="padding:0;overflow:hidden;max-width:90vw;">
+    <img src="" alt="" style="width:100%;max-height:70vh;object-fit:contain;display:block;">
+    <div class="image-desc" style="padding:10px;font-size:13px;color:var(--text-2);text-align:center;"></div>
+  </div>
+</div>
+<!-- Form Asociado -->
+<div class="modal" id="modal-form-asociado">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title" id="form-asociado-title">Nuevo Asociado</div></div>
+    <div class="modal-body">
+      <input type="hidden" id="fa-id">
+      <div class="form-group"><label class="form-label">Nombre completo *</label><input type="text" class="form-input" id="fa-nombre" placeholder="JUAN PÉREZ"></div>
+      <div class="form-group"><label class="form-label">Documento *</label><input type="text" class="form-input" id="fa-documento"></div>
+      <div class="form-group"><label class="form-label">Teléfono</label><input type="tel" class="form-input" id="fa-telefono"></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="fa-email"></div>
+      <div class="form-group"><label class="form-label">Dirección</label><input type="text" class="form-input" id="fa-direccion"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-sm" id="btn-delete-asociado" onclick="deleteAsociadoConfirm()" style="display:none;">🗑️</button>
+      <button class="btn btn-outline" onclick="document.getElementById('modal-form-asociado').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAsociado()">Guardar</button>
+    </div>
+  </div>
+</div>
+<!-- Form Notificación -->
+<div class="modal" id="modal-form-notif">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title">Notificación</div></div>
+    <div class="modal-body">
+      <input type="hidden" id="fn-id">
+      <div class="form-group"><label class="form-label">Tipo</label>
+        <select class="form-input" id="fn-tipo"><option value="info">ℹ️ Información</option><option value="general">📢 General</option><option value="importante">⚠️ Importante</option><option value="urgente">🚨 Urgente</option><option value="celebracion">🎉 Celebración</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Título *</label><input type="text" class="form-input" id="fn-titulo" placeholder="Título..."></div>
+      <div class="form-group"><label class="form-label">Mensaje *</label><textarea class="form-input" id="fn-mensaje" rows="3" placeholder="Contenido..."></textarea></div>
+      <div class="form-group"><label class="form-label">URL de imagen (opcional)</label><input type="url" class="form-input" id="fn-imagen" placeholder="https://..."></div>
+      <div class="form-group"><label class="form-label">Orden (menor = primero)</label><input type="number" class="form-input" id="fn-orden" value="0"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-form-notif').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveNotificacion()">Guardar</button>
+    </div>
+  </div>
+</div>
+<!-- Form IE -->
+<div class="modal" id="modal-form-ie">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title" id="form-ie-title">Nuevo Registro</div></div>
+    <div class="modal-body">
+      <form id="form-ie">
+        <input type="hidden" id="ie-tipo" value="ingreso">
+        <div class="form-group"><label class="form-label">Concepto *</label><input type="text" class="form-input" id="ie-concepto" placeholder="Ej: Cobro servicio agua"></div>
+        <div class="form-group"><label class="form-label">Valor ($) *</label><input type="number" class="form-input" id="ie-valor" min="0"></div>
+        <div class="form-group"><label class="form-label">Categoría</label><input type="text" class="form-input" id="ie-categoria" placeholder="Servicio, Material, etc."></div>
+        <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="ie-fecha"></div>
+        <div class="form-group"><label class="form-label">Descripción</label><textarea class="form-input" id="ie-descripcion" rows="2"></textarea></div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-form-ie').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveIngresoEgreso()">Guardar</button>
+    </div>
+  </div>
+</div>
+<!-- Add Galería -->
+<div class="modal" id="modal-add-galeria">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title" id="gal-modal-title">Agregar Imagen</div></div>
+    <div class="modal-body">
+      <input type="hidden" id="gal-id">
+      <div style="background:var(--primary-bg);border-radius:8px;padding:10px;font-size:12px;color:var(--primary);">💡 Usa <a href="https://es.imgbb.com/" target="_blank" style="color:var(--primary);font-weight:700;">imgbb.com</a> para alojar imágenes gratis</div>
+      <div class="form-group"><label class="form-label">URL de imagen *</label><input type="url" class="form-input" id="gal-url" placeholder="https://i.ibb.co/..."></div>
+      <div class="form-group"><label class="form-label">Título</label><input type="text" class="form-input" id="gal-titulo" placeholder="Título de la imagen"></div>
+      <div class="form-group"><label class="form-label">Descripción</label><input type="text" class="form-input" id="gal-descripcion" placeholder="Breve descripción..."></div>
+      <div class="form-group"><label class="form-label">Categoría</label>
+        <select class="form-input" id="gal-categoria"><option value="todos">Todos</option><option value="proyectos">Proyectos</option><option value="eventos">Eventos</option><option value="destacado">Destacado</option><option value="otros">Otros</option></select>
+      </div>
+      <div id="gal-preview" style="display:none;border-radius:8px;overflow:hidden;max-height:160px;"><img src="" style="width:100%;height:160px;object-fit:cover;"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-add-galeria').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveGaleriaItem()">Guardar</button>
+    </div>
+  </div>
+</div>
+<!-- Form Destacado RTE -->
+<div class="modal" id="modal-form-destacado">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title" id="dest-modal-title">Nuevo Destacado</div></div>
+    <div class="modal-body">
+      <input type="hidden" id="dest-id">
+      <div class="form-group"><label class="form-label">Título</label><input type="text" class="form-input" id="dest-titulo" placeholder="Título del destacado"></div>
+      <div class="form-group">
+        <label class="form-label">Contenido</label>
+        <div class="rte-toolbar">
+          <button class="rte-btn" onclick="rteCmd('bold')"><b>B</b></button>
+          <button class="rte-btn" onclick="rteCmd('italic')"><i>I</i></button>
+          <button class="rte-btn" onclick="rteFormatBlock('h1')">H1</button>
+          <button class="rte-btn" onclick="rteFormatBlock('h2')">H2</button>
+          <button class="rte-btn" onclick="rteFormatBlock('h3')">H3</button>
+          <button class="rte-btn" onclick="rteCmd('insertUnorderedList')">• Lista</button>
+          <button class="rte-btn" onclick="rteCmd('insertOrderedList')">1. Lista</button>
+          <select class="rte-btn" onchange="rteForeColor(this)" style="padding:3px 6px;">
+            <option value="">🎨 Color</option>
+            <option value="#1565C0">Azul</option>
+            <option value="#C62828">Rojo</option>
+            <option value="#2E7D32">Verde</option>
+            <option value="#E65100">Naranja</option>
+            <option value="#6A1B9A">Morado</option>
+          </select>
+          <button class="rte-btn" onclick="rteAddImage()">🖼️</button>
+        </div>
+        <div class="rte-content" id="dest-content" contenteditable="true"></div>
+      </div>
+      <div class="form-group"><label class="form-label">URL de imagen (opcional)</label><input type="url" class="form-input" id="dest-imagen" placeholder="https://..."></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-form-destacado').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveDestacado()">Guardar</button>
+    </div>
+  </div>
+</div>
+<!-- Ver Destacado -->
+<div class="modal" id="modal-ver-destacado">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div style="padding:0 16px 24px;">
+      <div id="destacado-full-content" style="padding:8px 0;"></div>
+      <div class="destacado-nav">
+        <button class="destacado-nav-btn" id="dest-prev-btn" onclick="navDestacado(-1)">←</button>
+        <span id="dest-nav-label" style="font-size:12px;color:var(--text-2);"></span>
+        <button class="destacado-nav-btn" id="dest-next-btn" onclick="navDestacado(1)">→</button>
+      </div>
+      <button class="btn btn-outline btn-full" style="margin-top:12px;" onclick="document.getElementById('modal-ver-destacado').classList.remove('active')">Cerrar</button>
+    </div>
+  </div>
+</div>
+<!-- Config -->
+<div class="modal" id="modal-config">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title">⚙️ Configuración</div></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Tarifa por m³ ($)</label><input type="number" class="form-input" id="cfg-tarifa" value="2400"></div>
+      <div class="form-group"><label class="form-label">Administración mensual ($)</label><input type="number" class="form-input" id="cfg-admin" value="28000"></div>
+      <div class="form-group"><label class="form-label">Nombre Administrador</label><input type="text" class="form-input" id="cfg-admin-name"></div>
+      <div class="form-group"><label class="form-label">NIT</label><input type="text" class="form-input" id="cfg-nit"></div>
+      <div class="divider"></div>
+      <div style="font-size:13px;font-weight:700;color:var(--text-2);margin-bottom:8px;">Cuenta Bancaria</div>
+      <div class="form-group"><label class="form-label">Banco</label><input type="text" class="form-input" id="cfg-banco"></div>
+      <div class="form-group"><label class="form-label">Tipo de cuenta</label><input type="text" class="form-input" id="cfg-tipo-cuenta"></div>
+      <div class="form-group"><label class="form-label">Número de cuenta</label><input type="text" class="form-input" id="cfg-num-cuenta"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-config').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveConfig()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+<!-- Video admin -->
+<div class="modal" id="modal-video-admin">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title">🎬 Video Destacado</div></div>
+    <div class="modal-body">
+      <div id="videos-list-admin" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+      <div class="divider"></div>
+      <div class="form-group" style="margin-top:12px;"><label class="form-label">URL YouTube</label><input type="url" class="form-input" id="va-url" placeholder="https://www.youtube.com/watch?v=..."></div>
+      <div class="form-group"><label class="form-label">Título</label><input type="text" class="form-input" id="va-titulo"></div>
+      <div style="display:flex;align-items:center;gap:10px;"><input type="checkbox" id="va-destacado"><label for="va-destacado" style="font-size:13px;">Mostrar en inicio</label></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-video-admin').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveVideo()">Agregar</button>
+    </div>
+  </div>
+</div>
+<!-- Informe -->
+<div class="modal" id="modal-informe">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div style="padding:0 16px 24px;">
+      <div id="informe-detail-container"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="btn btn-outline" onclick="document.getElementById('modal-informe').classList.remove('active')">Cerrar</button>
+        <button class="btn btn-primary" onclick="printInforme()">🖨️ Imprimir / PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- QR -->
+<div class="modal center" id="modal-qr">
+  <div class="modal-card" style="text-align:center;">
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px;">📷 QR de la Aplicación</div>
+    <div style="background:#f0f0f0;border-radius:12px;padding:24px;"><div style="font-size:40px;margin-bottom:8px;">📱</div><p style="font-size:13px;color:#666;">El código QR de la app irá aquí.<br>Configúralo en el panel de administración.</p></div>
+    <button class="btn btn-primary btn-full" style="margin-top:12px;" onclick="document.getElementById('modal-qr').classList.remove('active')">Cerrar</button>
+  </div>
+</div>
+<!-- Form Encuesta -->
+<div class="modal" id="modal-form-encuesta">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><div class="modal-title" id="enc-modal-title">Nueva Encuesta</div></div>
+    <div class="modal-body">
+      <input type="hidden" id="enc-id">
+      <div class="form-group"><label class="form-label">Pregunta *</label><input type="text" class="form-input" id="enc-pregunta" placeholder="¿Cuál es tu pregunta?"></div>
+      <div class="form-group"><label class="form-label">Opciones (una por línea)</label><textarea class="form-input" id="enc-opciones" rows="4" placeholder="Opción 1&#10;Opción 2&#10;Opción 3"></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Inicio</label><input type="date" class="form-input" id="enc-inicio"></div>
+        <div class="form-group"><label class="form-label">Fin</label><input type="date" class="form-input" id="enc-fin"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-form-encuesta').classList.remove('active')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveEncuesta()">Crear</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+<script>
+/* ─── EXTRAS ─── */
+let currentGalleryFilter='todos',allGaleriaItems=[],allDestacados=[],currentDestacadoIdx=0,informePeriodo='anual',allIEData=[];
+let dismissedNotifs=JSON.parse(localStorage.getItem('alg_dismissed_ntf')||'[]');
+
+/* ── Drawer ── */
+function toggleDrawer(open){
+  document.getElementById('main-drawer').classList.toggle('open',open);
+  document.getElementById('drawer-overlay').classList.toggle('open',open);
+  if(open)updateDrawerInfo();
+  else document.getElementById('burger-checkbox').checked=false;
+}
+function closeDrawer(){toggleDrawer(false);}
+function updateDrawerInfo(){
+  const s=AppState.session,a=AppState.asociado;
+  document.getElementById('drawer-name-label').textContent=s?s.nombre:a?a.nombre:'Público';
+  document.getElementById('drawer-role-label').textContent=s?(s.rol.charAt(0).toUpperCase()+s.rol.slice(1)):a?'Asociado':'Visitante';
+  document.getElementById('drawer-admin-section').style.display=isTesorero()?'block':'none';
+  document.getElementById('drawer-logout-section').style.display=isLoggedIn()?'block':'none';
+}
+
+/* ── Dark mode ── */
+function toggleDarkMode(on){
+  document.body.classList.toggle('dark-mode',on);
+  localStorage.setItem('alg_dark',on?'1':'0');
+}
+if(localStorage.getItem('alg_dark')==='1'){
+  document.body.classList.add('dark-mode');
+  const t=document.getElementById('dark-mode-toggle');
+  if(t)t.checked=true;
+}
+
+/* ── Compartir ── */
+function compartirApp(tipo){
+  closeDrawer();
+  if(tipo==='whatsapp'){
+    const url=window.location.href;
+    window.open(`https://wa.me/?text=${encodeURIComponent('Consulta tu cuenta del Acueducto Los Guaduales: '+url)},'_blank'`);
+  }else{document.getElementById('modal-qr').classList.add('active');}
+}
+function recargarNotificaciones(){
+  closeDrawer();
+  dismissedNotifs=[];
+  localStorage.setItem('alg_dismissed_ntf','[]');
+  loadHomeNotificaciones();
+  showToast('Notificaciones recargadas','success');
+}
+
+/* ── Onboarding Consultas ── */
+function goToObSlide(idx){
+  document.getElementById('ob-slide-0').style.display=idx===0?'flex':'none';
+  document.getElementById('ob-slide-1').style.display=idx===1?'flex':'none';
+}
+function goToConsultasLogin(){
+  document.getElementById('consultas-onboarding').style.display='none';
+  document.getElementById('consultas-login-section').style.display='block';
+}
+function loadConsultasScreen(){
+  document.getElementById('consultas-onboarding').style.display='block';
+  document.getElementById('consultas-login-section').style.display='none';
+  goToObSlide(0);
+  const d=document.getElementById('consultas-documento');
+  if(d)d.value='';
+  const e=document.getElementById('consultas-error');
+  if(e)e.textContent='';
+}
+
+/* ── Gallery ── */
+async function filterGallery(cat,el){
+  document.querySelectorAll('#home-gallery-filters .gf-chip').forEach(c=>c.classList.remove('active'));
+  if(el)el.classList.add('active');
+  currentGalleryFilter=cat;
+  if(!allGaleriaItems.length)try{allGaleriaItems=await DB.getGaleria();}catch(e){return;}
+  const filtered=cat==='todos'?allGaleriaItems:allGaleriaItems.filter(i=>(i.categoria||'todos')===cat);
+  const container=document.getElementById('home-gallery');
+  if(!container)return;
+  container.innerHTML=filtered.length===0
+    ?'<p style="color:var(--text-3);font-size:13px;padding:10px 0;">Sin imágenes en esta categoría</p>'
+    :filtered.map(i=>`<div class="gallery-card" onclick="openImageFullscreen('${escapeHtml(i.url)}','${escapeHtml(i.titulo||i.descripcion||'')}')"><img src="${escapeHtml(i.url)}" alt="${escapeHtml(i.titulo||'')}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="gallery-card-caption"><span class="gc-title">${escapeHtml(i.titulo||i.descripcion||'')}</span><span class="gc-tag">${escapeHtml(i.categoria||'')}</span></div></div>`).join('');
+}
+async function filterGalleryFull(cat,el){
+  document.querySelectorAll('#screen-galeria .gf-chip').forEach(c=>c.classList.remove('active'));
+  if(el)el.classList.add('active');
+  if(!allGaleriaItems.length)try{allGaleriaItems=await DB.getGaleria();}catch(e){}
+  const filtered=cat==='todos'?allGaleriaItems:allGaleriaItems.filter(i=>(i.categoria||'todos')===cat);
+  const grid=document.getElementById('galeria-grid');
+  grid.innerHTML=filtered.length===0
+    ?'<div class="empty-card"><span>🖼️</span><p>Sin imágenes en esta categoría</p></div>'
+    :filtered.map(i=>`<div class="gallery-item" onclick="openImageFullscreen('${escapeHtml(i.url)}','${escapeHtml(i.titulo||i.descripcion||'')}')"><img src="${escapeHtml(i.url)}" alt="${escapeHtml(i.titulo||'')}" loading="lazy" onerror="this.style.display='none'">${i.titulo||i.descripcion?`<span class="gallery-caption">${escapeHtml(i.titulo||i.descripcion)}</span>`:''}</div>`).join('');
+}
+async function loadGaleria(){
+  showLoading(true);
+  try{allGaleriaItems=await DB.getGaleria();filterGalleryFull('todos');}
+  catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+async function loadHomeGaleria(){
+  const c=document.getElementById('home-gallery');if(!c)return;
+  try{
+    allGaleriaItems=await DB.getGaleria();
+    if(!allGaleriaItems.length){c.innerHTML='';return;}
+    const filtered=currentGalleryFilter==='todos'?allGaleriaItems:allGaleriaItems.filter(i=>(i.categoria||'todos')===currentGalleryFilter);
+    c.innerHTML=filtered.map(i=>`<div class="gallery-card" onclick="openImageFullscreen('${escapeHtml(i.url)}','${escapeHtml(i.titulo||i.descripcion||'')}')"><img src="${escapeHtml(i.url)}" alt="${escapeHtml(i.titulo||'')}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="gallery-card-caption"><span class="gc-title">${escapeHtml(i.titulo||i.descripcion||'')}</span><span class="gc-tag">${escapeHtml(i.categoria||'')}</span></div></div>`).join('');
+  }catch(e){}
+}
+
+/* ── Admin Galería ── */
+async function loadAdminGaleria(){
+  showLoading(true);
+  try{
+    const items=await DB.getGaleria();
+    const list=document.getElementById('admin-galeria-grid');
+    list.innerHTML=items.length===0
+      ?'<div class="empty-card"><span>🖼️</span><p>Sin imágenes</p></div>'
+      :items.map(i=>`<div style="background:var(--surface);border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow);"><div style="position:relative;height:120px;"><img src="${escapeHtml(i.url)}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.5);color:white;padding:6px 8px;font-size:11px;">${escapeHtml(i.titulo||i.descripcion||'Sin descripción')}</div></div><div style="padding:10px;display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:var(--text-2);flex:1;">${escapeHtml(i.categoria||'todos')}</span><button class="btn btn-sm btn-outline" onclick="openEditGaleriaModal('${i.id}')">✏️</button><button class="btn btn-sm btn-danger" onclick="deleteGaleriaItem('${i.id}')">🗑️</button></div></div>`).join('');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+function openAddGaleriaModal(){
+  document.getElementById('gal-id').value='';
+  ['gal-url','gal-titulo','gal-descripcion'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('gal-categoria').value='todos';
+  document.getElementById('gal-preview').style.display='none';
+  document.getElementById('gal-modal-title').textContent='Agregar Imagen';
+  document.getElementById('modal-add-galeria').classList.add('active');
+}
+async function openEditGaleriaModal(id){
+  const item=allGaleriaItems.find(i=>i.id===id);
+  if(!item)return;
+  document.getElementById('gal-id').value=id;
+  document.getElementById('gal-url').value=item.url||'';
+  document.getElementById('gal-titulo').value=item.titulo||'';
+  document.getElementById('gal-descripcion').value=item.descripcion||'';
+  document.getElementById('gal-categoria').value=item.categoria||'todos';
+  const prev=document.getElementById('gal-preview');
+  prev.querySelector('img').src=item.url;
+  prev.style.display='block';
+  document.getElementById('gal-modal-title').textContent='Editar Imagen';
+  document.getElementById('modal-add-galeria').classList.add('active');
+}
+document.addEventListener('input',e=>{
+  if(e.target.id==='gal-url'){
+    const url=e.target.value.trim(),prev=document.getElementById('gal-preview');
+    if(url){prev.querySelector('img').src=url;prev.style.display='block';}
+    else prev.style.display='none';
+  }
+});
+async function saveGaleriaItem(){
+  const id=document.getElementById('gal-id').value;
+  const data={url:document.getElementById('gal-url').value.trim(),titulo:document.getElementById('gal-titulo').value.trim(),descripcion:document.getElementById('gal-descripcion').value.trim(),categoria:document.getElementById('gal-categoria').value,orden:0,activo:true};
+  if(!data.url){showToast('URL requerida','warning');return;}
+  showLoading(true);
+  try{
+    if(id){await getSupabase().from('galeria').update(data).eq('id',id);showToast('Imagen actualizada','success');}
+    else{await DB.createGaleriaItem(data);showToast('Imagen agregada','success');}
+    allGaleriaItems=[];
+    document.getElementById('modal-add-galeria').classList.remove('active');
+    loadAdminGaleria();loadHomeGaleria();
+  }catch(e){showToast('Error al guardar','error');}
+  finally{showLoading(false);}
+}
+async function deleteGaleriaItem(id){
+  const ok=await showGithubConfirm({title:'Eliminar Imagen',message:'Esta imagen se eliminará de la galería.',confirmText:'ELIMINAR',dangerLabel:'Eliminar'});
+  if(!ok)return;
+  showLoading(true);
+  try{await DB.deleteGaleriaItem(id);showToast('Imagen eliminada','success');allGaleriaItems=[];loadAdminGaleria();loadHomeGaleria();}
+  catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+
+/* ── Destacados RTE ── */
+async function loadDestacados(){
+  try{
+    const{data}=await getSupabase().from('destacados').select('*').eq('activo',true).order('orden');
+    allDestacados=data||[];
+    renderDestacadosHome();
+    if(document.getElementById('admin-contenido-list'))renderAdminContenido();
+  }catch(e){allDestacados=[];}
+}
+function renderDestacadosHome(){
+  const c=document.getElementById('home-destacado-list');if(!c)return;
+  const s=document.getElementById('home-destacado-section');
+  if(!allDestacados.length){if(s)s.style.display='none';return;}
+  if(s)s.style.display='block';
+  c.innerHTML=allDestacados.map((d,i)=>`<div class="destacado-card" onclick="openVerDestacado(${i})"><div style="font-size:15px;font-weight:800;color:var(--primary);margin-bottom:6px;">${escapeHtml(d.titulo||'')}</div><div style="font-size:13px;color:var(--text-2);overflow:hidden;max-height:52px;">${d.contenido||''}</div>${d.imagen_url?`<img src="${escapeHtml(d.imagen_url)}" style="width:100%;border-radius:8px;margin-top:8px;max-height:120px;object-fit:cover;" onclick="event.stopPropagation();openImageFullscreen('${escapeHtml(d.imagen_url)}','')">`:''}</div>`).join('');
+}
+function openVerDestacado(idx){
+  currentDestacadoIdx=idx;renderDestacadoFull();
+  document.getElementById('modal-ver-destacado').classList.add('active');
+}
+function renderDestacadoFull(){
+  const d=allDestacados[currentDestacadoIdx];if(!d)return;
+  document.getElementById('destacado-full-content').innerHTML=`<div style="font-size:18px;font-weight:800;color:var(--primary);margin:12px 0 10px;">${escapeHtml(d.titulo||'')}</div><div style="font-size:14px;line-height:1.8;color:var(--text);">${d.contenido||''}</div>${d.imagen_url?`<img src="${escapeHtml(d.imagen_url)}" style="width:100%;border-radius:8px;margin-top:12px;cursor:pointer;" onclick="openImageFullscreen('${escapeHtml(d.imagen_url)}','')">`:``}`;
+  document.getElementById('dest-nav-label').textContent=`${currentDestacadoIdx+1} / ${allDestacados.length}`;
+  document.getElementById('dest-prev-btn').disabled=currentDestacadoIdx===0;
+  document.getElementById('dest-next-btn').disabled=currentDestacadoIdx===allDestacados.length-1;
+}
+function navDestacado(dir){
+  currentDestacadoIdx=Math.max(0,Math.min(allDestacados.length-1,currentDestacadoIdx+dir));
+  renderDestacadoFull();
+}
+function renderAdminContenido(){
+  const list=document.getElementById('admin-contenido-list');if(!list)return;
+  list.innerHTML=allDestacados.length===0
+    ?'<div class="empty-card"><span>📌</span><p>Sin contenido destacado</p></div>'
+    :allDestacados.map(d=>`<div class="list-item"><div class="li-info"><span class="li-name">${escapeHtml(d.titulo||'Sin título')}</span></div><div style="display:flex;gap:6px;"><button class="btn btn-sm btn-outline" onclick="openFormDestacado('${d.id}')">✏️</button><button class="btn btn-sm btn-danger" onclick="deleteDestacado('${d.id}','${escapeHtml(d.titulo||'este destacado')}')">🗑️</button></div></div>`).join('');
+}
+function openFormDestacado(id){
+  document.getElementById('dest-id').value=id||'';
+  document.getElementById('dest-titulo').value='';
+  document.getElementById('dest-content').innerHTML='';
+  document.getElementById('dest-imagen').value='';
+  if(id){const d=allDestacados.find(x=>x.id===id);if(d){document.getElementById('dest-titulo').value=d.titulo||'';document.getElementById('dest-content').innerHTML=d.contenido||'';document.getElementById('dest-imagen').value=d.imagen_url||'';}}
+  document.getElementById('dest-modal-title').textContent=id?'Editar Destacado':'Nuevo Destacado';
+  document.getElementById('modal-form-destacado').classList.add('active');
+}
+async function saveDestacado(){
+  const id=document.getElementById('dest-id').value;
+  const data={titulo:document.getElementById('dest-titulo').value.trim(),contenido:document.getElementById('dest-content').innerHTML,imagen_url:document.getElementById('dest-imagen').value.trim()||null,activo:true,orden:allDestacados.length};
+  showLoading(true);
+  try{
+    const sb=getSupabase();
+    if(id){await sb.from('destacados').update(data).eq('id',id);showToast('Actualizado','success');}
+    else{await sb.from('destacados').insert([data]);showToast('Creado','success');}
+    document.getElementById('modal-form-destacado').classList.remove('active');
+    await loadDestacados();renderAdminContenido();
+  }catch(e){showToast('Error: crea la tabla "destacados" en Supabase (ver SQL adicional)','error');}
+  finally{showLoading(false);}
+}
+async function deleteDestacado(id,titulo){
+  const ok=await showGithubConfirm({title:'Eliminar Destacado',message:'Esta acción no se puede deshacer.',confirmText:titulo,dangerLabel:'Eliminar'});
+  if(!ok)return;
+  showLoading(true);
+  try{await getSupabase().from('destacados').delete().eq('id',id);showToast('Eliminado','success');await loadDestacados();renderAdminContenido();}
+  catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+function rteCmd(cmd){document.execCommand(cmd,false,null);document.getElementById('dest-content').focus();}
+function rteFormatBlock(tag){document.execCommand('formatBlock',false,tag);document.getElementById('dest-content').focus();}
+function rteForeColor(sel){if(sel.value){document.execCommand('foreColor',false,sel.value);sel.value='';}document.getElementById('dest-content').focus();}
+function rteAddImage(){const url=prompt('URL de la imagen:');if(url)document.execCommand('insertImage',false,url);}
+
+/* ── Entradas / Salidas ── */
+async function loadEntradas(){
+  showLoading(true);
+  try{
+    allIEData=await DB.getIngresosEgresos();
+    const ent=allIEData.filter(i=>i.tipo==='ingreso');
+    document.getElementById('ent-total').textContent=formatCOP(ent.reduce((s,i)=>s+(i.valor||0),0));
+    document.getElementById('ent-count').textContent=ent.length;
+    document.getElementById('ent-list').innerHTML=ent.length===0
+      ?'<div class="empty-card"><span>↑</span><p>Sin entradas registradas</p></div>'
+      :ent.map(buildIEItem).join('');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+async function loadSalidas(){
+  showLoading(true);
+  try{
+    if(!allIEData.length)allIEData=await DB.getIngresosEgresos();
+    const sal=allIEData.filter(i=>i.tipo==='egreso');
+    document.getElementById('sal-total').textContent=formatCOP(sal.reduce((s,i)=>s+(i.valor||0),0));
+    document.getElementById('sal-count').textContent=sal.length;
+    document.getElementById('sal-list').innerHTML=sal.length===0
+      ?'<div class="empty-card"><span>↓</span><p>Sin salidas registradas</p></div>'
+      :sal.map(buildIEItem).join('');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+function buildIEItem(i){
+  return `<div class="list-item"><div class="li-icon ${i.tipo==='ingreso'?'li-ingreso':'li-egreso'}">${i.tipo==='ingreso'?'↑':'↓'}</div><div class="li-info"><span class="li-name">${escapeHtml(i.concepto)}</span><span class="li-detail">${formatDate(i.fecha)}${i.categoria?' · '+i.categoria:''}</span></div><div class="li-right"><strong class="${i.tipo==='ingreso'?'text-success':'text-danger'}">${formatCOP(i.valor)}</strong><button class="btn-icon" onclick="event.stopPropagation();deleteIE('${i.id}')">🗑️</button></div></div>`;
+}
+function openFormIE(tipo){
+  document.getElementById('ie-tipo').value=tipo;
+  document.getElementById('form-ie-title').textContent=tipo==='ingreso'?'↑ Nueva Entrada':'↓ Nueva Salida';
+  document.getElementById('form-ie').reset();
+  document.getElementById('ie-tipo').value=tipo;
+  document.getElementById('ie-fecha').value=todayISO();
+  document.getElementById('modal-form-ie').classList.add('active');
+}
+async function loadIngresosEgresos(){
+  showLoading(true);
+  try{
+    allIEData=await DB.getIngresosEgresos();
+    const totalI=allIEData.filter(i=>i.tipo==='ingreso').reduce((s,i)=>s+(i.valor||0),0);
+    const totalE=allIEData.filter(i=>i.tipo==='egreso').reduce((s,i)=>s+(i.valor||0),0);
+    const b=document.getElementById('ts-balance');if(b)b.textContent=formatCOP(totalI-totalE);
+  }catch(e){}
+  finally{showLoading(false);}
+}
+
+/* ── Informes ── */
+async function loadInformes(){await switchInformePeriod(informePeriodo);}
+function switchInformePeriod(periodo){
+  informePeriodo=periodo;
+  document.getElementById('ipt-anual').classList.toggle('active',periodo==='anual');
+  document.getElementById('ipt-mensual').classList.toggle('active',periodo==='mensual');
+  if(periodo==='anual')renderInformesAnuales();else renderInformesMensuales();
+}
+async function renderInformesAnuales(){
+  showLoading(true);
+  try{
+    const ie=await DB.getIngresosEgresos();
+    const byYear={};
+    ie.forEach(i=>{const y=new Date(i.fecha+'T00:00:00').getFullYear();if(!byYear[y])byYear[y]={ingresos:0,egresos:0};byYear[y][i.tipo==='ingreso'?'ingresos':'egresos']+=(i.valor||0);});
+    const years=Object.keys(byYear).sort((a,b)=>b-a);
+    document.getElementById('informes-list').innerHTML=years.length===0
+      ?'<div class="empty-card"><span>📊</span><p>Sin datos registrados</p></div>'
+      :years.map(y=>`<div class="year-item" onclick="openInformeDetalle('anual','${y}')"><div><div class="yi-year">${y}</div><div class="yi-meta">Ing: ${formatCOP(byYear[y].ingresos)} · Egr: ${formatCOP(byYear[y].egresos)}</div></div><div style="text-align:right;"><div style="font-size:15px;font-weight:800;color:${byYear[y].ingresos-byYear[y].egresos>=0?'var(--success)':'var(--danger)'};">${formatCOP(byYear[y].ingresos-byYear[y].egresos)}</div><div class="yi-meta">Balance</div></div><div class="yi-arrow">›</div></div>`).join('');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+async function renderInformesMensuales(){
+  showLoading(true);
+  try{
+    const ie=await DB.getIngresosEgresos();
+    const byMonth={};
+    ie.forEach(i=>{const d=new Date(i.fecha+'T00:00:00');const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;const label=`${MESES[d.getMonth()]} ${d.getFullYear()}`;if(!byMonth[key])byMonth[key]={label,ingresos:0,egresos:0};byMonth[key][i.tipo==='ingreso'?'ingresos':'egresos']+=(i.valor||0);});
+    const keys=Object.keys(byMonth).sort().reverse();
+    document.getElementById('informes-list').innerHTML=keys.length===0
+      ?'<div class="empty-card"><span>📊</span><p>Sin datos</p></div>'
+      :keys.map(k=>`<div class="year-item" onclick="openInformeDetalle('mensual','${k}')"><div><div class="yi-year" style="font-size:14px;">${byMonth[k].label}</div><div class="yi-meta">Ing: ${formatCOP(byMonth[k].ingresos)} · Egr: ${formatCOP(byMonth[k].egresos)}</div></div><div style="text-align:right;"><div style="font-size:14px;font-weight:800;color:${byMonth[k].ingresos-byMonth[k].egresos>=0?'var(--success)':'var(--danger)'};">${formatCOP(byMonth[k].ingresos-byMonth[k].egresos)}</div><div class="yi-meta">Balance</div></div><div class="yi-arrow">›</div></div>`).join('');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+async function openInformeDetalle(tipo,key){
+  showLoading(true);
+  try{
+    const ie=await DB.getIngresosEgresos();
+    let items,titulo;
+    if(tipo==='anual'){items=ie.filter(i=>new Date(i.fecha+'T00:00:00').getFullYear()==key);titulo=`Informe Anual ${key}`;}
+    else{const[y,m]=key.split('-');items=ie.filter(i=>{const d=new Date(i.fecha+'T00:00:00');return d.getFullYear()==y&&d.getMonth()+1==m;});titulo=`Informe ${MESES[parseInt(m)-1]} ${y}`;}
+    const ingresos=items.filter(i=>i.tipo==='ingreso'),egresos=items.filter(i=>i.tipo==='egreso');
+    const totalI=ingresos.reduce((s,i)=>s+(i.valor||0),0),totalE=egresos.reduce((s,i)=>s+(i.valor||0),0);
+    const cfg=AppState.config;
+    const wavePath="M0,40L48,45C96,50,192,60,288,58C384,56,480,42,576,38C672,34,768,38,864,42C960,46,1056,50,1152,48C1248,46,1344,38,1392,34L1440,30L1440,80L0,80Z";
+    document.getElementById('informe-detail-container').innerHTML=`
+<div class="informe-print" id="informe-print-area">
+  <div class="ip-header"><div class="ip-logo-row"><div class="ip-logo-icon">💧</div><div class="ip-logo-text"><strong>${cfg.NOMBRE_ORG}</strong><strong>${cfg.NOMBRE_ACUEDUCTO}</strong><small>NIT. ${cfg.NIT}</small><em>"la semilla del futuro"</em></div></div><div class="ip-header-wave"><svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="${wavePath}" fill="white" fill-opacity="0.18"/></svg></div></div>
+  <div class="ip-meta"><div class="ip-meta-left"><strong>${titulo}</strong><span>${cfg.VEREDA} · ${cfg.MUNICIPIO}</span></div><div class="ip-meta-right"><span class="ip-fecha">Generado: ${formatDate(todayISO())}</span></div></div>
+  <div class="ip-summary"><div class="ip-sum-item"><div class="ip-sum-label">Total Ingresos</div><div class="ip-sum-val ingresos">${formatCOP(totalI)}</div></div><div class="ip-sum-item"><div class="ip-sum-label">Total Egresos</div><div class="ip-sum-val egresos">${formatCOP(totalE)}</div></div><div class="ip-sum-item"><div class="ip-sum-label">Balance</div><div class="ip-sum-val balance">${formatCOP(totalI-totalE)}</div></div></div>
+  ${ingresos.length?`<div class="ip-section"><div class="ip-section-title">📈 Ingresos (${ingresos.length})</div><table class="ip-table"><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th class="td-amount">Valor</th></tr></thead><tbody>${ingresos.map(i=>`<tr><td>${formatDate(i.fecha)}</td><td>${escapeHtml(i.concepto)}</td><td>${escapeHtml(i.categoria||'—')}</td><td class="td-amount td-ingreso">${formatCOP(i.valor)}</td></tr>`).join('')}<tr class="ip-total-row"><td colspan="3">Total Ingresos</td><td>${formatCOP(totalI)}</td></tr></tbody></table></div>`:''}
+  ${egresos.length?`<div class="ip-section"><div class="ip-section-title">📉 Egresos (${egresos.length})</div><table class="ip-table"><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th class="td-amount">Valor</th></tr></thead><tbody>${egresos.map(i=>`<tr><td>${formatDate(i.fecha)}</td><td>${escapeHtml(i.concepto)}</td><td>${escapeHtml(i.categoria||'—')}</td><td class="td-amount td-egreso">${formatCOP(i.valor)}</td></tr>`).join('')}<tr class="ip-total-row"><td colspan="3">Total Egresos</td><td>${formatCOP(totalE)}</td></tr></tbody></table></div>`:''}
+  <div class="ip-footer"><strong>${cfg.NOMBRE_ACUEDUCTO} · NIT. ${cfg.NIT}</strong><small>${cfg.VEREDA} · ${cfg.MUNICIPIO}</small></div>
+</div>`;
+    document.getElementById('modal-informe').classList.add('active');
+  }catch(e){showToast('Error al generar informe','error');}
+  finally{showLoading(false);}
+}
+function printInforme(){
+  const area=document.getElementById('print-area'),content=document.getElementById('informe-print-area');
+  if(area&&content){area.innerHTML=content.outerHTML;area.style.display='block';}
+  setTimeout(()=>{window.print();setTimeout(()=>{if(area){area.innerHTML='';area.style.display='none';}},1000);},200);
+}
+
+/* ── Facturas filter ── */
+async function filterFacturas(estado){
+  showLoading(true);
+  try{
+    const f=await DB.getFacturas(estado?{estado}:{});
+    document.getElementById('facturas-list').innerHTML=f.length===0
+      ?'<div class="empty-card"><span>📄</span><p>Sin facturas</p></div>'
+      :f.map(fac=>`<div class="factura-card" onclick="navigateTo('factura-ver',{id:'${fac.id}'})"><div class="fc-header"><div><span class="fc-num">${escapeHtml(fac.numero_factura)}</span><span class="fc-mes">${escapeHtml(fac.asociados?.nombre||'—')}</span></div><span class="status-badge ${getEstadoClass(fac.estado)}">${getEstadoLabel(fac.estado)}</span></div><div class="fc-body"><div class="fc-detail"><span>${fac.mes_facturado} ${fac.anio}</span></div><div class="fc-detail"><span>Total</span><strong>${formatCOP(fac.valor_total)}</strong></div></div></div>`).join('');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+
+/* ── Ver Factura (con acciones) ── */
+async function loadVerFactura(id){
+  if(!id){navigateTo('tesoreria-facturas');return;}
+  showLoading(true);
+  try{
+    const f=await DB.getFacturaById(id);
+    if(!f){showToast('Factura no encontrada','error');return;}
+    AppState.currentFactura=f;
+    renderFacturaPrint(f,false);
+    document.getElementById('vf-factura-id').value=id;
+    document.getElementById('vf-factura-num').textContent=f.numero_factura;
+    document.getElementById('vf-estado').className=`status-badge ${getEstadoClass(f.estado)}`;
+    document.getElementById('vf-estado').textContent=getEstadoLabel(f.estado);
+    const acc=document.getElementById('vf-acciones');
+    if(isTesorero()){
+      acc.innerHTML=`
+        <div class="action-row"><button class="btn btn-success" onclick="marcarFacturaPagada('${id}')">✅ Marcar Pagada</button><button class="btn btn-warning" onclick="cambiarEstadoFactura('${id}','vencida')">⏰ Vencida</button></div>
+        <div class="action-row"><button class="btn btn-outline" onclick="cambiarEstadoFactura('${id}','suspendida')">🚫 Suspender</button><button class="btn btn-outline" onclick="navigateTo('recibo-nuevo',{facturaId:'${id}'})">🧾 Crear Recibo</button></div>
+        <div class="action-row"><button class="btn btn-outline" onclick="printFacturaDoc()">🖨️ Imprimir</button><button class="btn btn-danger" onclick="deleteFactura('${id}')">🗑️ Eliminar</button></div>
+        <div style="font-size:12px;font-weight:700;color:var(--text-2);margin-top:4px;">📤 Notificar asociado:</div>
+        <div class="wa-row"><button class="wa-btn-item" onclick="openWhatsApp('factura','${id}')">💬 WhatsApp</button><button class="sms-btn-item" onclick="openSMS('${id}')">📱 SMS</button><button class="email-btn-item" onclick="openEmail('${id}')">✉️ Email</button></div>`;
+    }else{acc.innerHTML='';}
+  }catch(e){showToast('Error al cargar factura','error');}
+  finally{showLoading(false);}
+}
+function printFacturaDoc(){
+  const area=document.getElementById('print-area'),content=document.getElementById('factura-print-area');
+  if(area&&content){area.innerHTML=content.outerHTML;area.style.display='block';}
+  setTimeout(()=>{window.print();setTimeout(()=>{if(area){area.innerHTML='';area.style.display='none';}},1000);},200);
+}
+
+/* ── Ver Recibo (con acciones) ── */
+async function loadVerRecibo(id){
+  if(!id){navigateTo('tesoreria-recibos');return;}
+  showLoading(true);
+  try{
+    const r=await DB.getReciboById(id);
+    if(!r){showToast('Recibo no encontrado','error');return;}
+    renderReciboPrint(r);
+    document.getElementById('vr-recibo-id').value=id;
+    document.getElementById('vr-recibo-num').textContent=r.numero_recibo;
+    const acc=document.getElementById('vr-acciones');
+    if(isTesorero()){acc.innerHTML=`<div class="action-row"><button class="btn btn-outline" onclick="printReciboDoc()">🖨️ Imprimir</button><button class="btn btn-danger" onclick="deleteRecibo('${id}')">🗑️ Eliminar</button></div>`;}
+    else{acc.innerHTML='';}
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+function printReciboDoc(){
+  const area=document.getElementById('print-area'),content=document.getElementById('recibo-print-area');
+  if(area&&content){area.innerHTML=content.outerHTML;area.style.display='block';}
+  setTimeout(()=>{window.print();setTimeout(()=>{if(area){area.innerHTML='';area.style.display='none';}},1000);},200);
+}
+
+/* ── Notificaciones SMS/Email ── */
+function openSMS(facturaId){
+  const f=AppState.currentFactura;if(!f)return;
+  const tel=(f.asociados?.telefono||'').replace(/\D/g,'');
+  const msg=`Acueducto Los Guaduales: Hola ${f.asociados?.nombre}. Factura ${f.numero_factura} - Valor: ${formatCOP(f.valor_total)} - Límite: ${formatDate(f.fecha_limite)}`;
+  window.open(`sms:${tel}?body=${encodeURIComponent(msg)}`);
+}
+function openEmail(facturaId){
+  const f=AppState.currentFactura;if(!f)return;
+  const subj=`Factura ${f.numero_factura} - Acueducto Los Guaduales`;
+  const body=`Hola ${f.asociados?.nombre},\n\nTiene una nueva factura del Acueducto Los Guaduales.\n\nFactura: ${f.numero_factura}\nMes: ${f.mes_facturado} ${f.anio}\nValor: ${formatCOP(f.valor_total)}\nFecha límite: ${formatDate(f.fecha_limite)}\n\nGracias por utilizar nuestros servicios.`;
+  window.open(`mailto:${f.asociados?.email||''}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`);
+}
+
+/* ── Notificaciones home con Wave cards ── */
+const WAVE_SVG="M0,256L11.4,240C22.9,224,46,192,69,192C91.4,192,114,224,137,234.7C160,245,183,235,206,213.3C228.6,192,251,160,274,149.3C297.1,139,320,149,343,181.3C365.7,213,389,267,411,282.7C434.3,299,457,277,480,250.7C502.9,224,526,192,549,181.3C571.4,171,594,181,617,208C640,235,663,277,686,256C708.6,235,731,149,754,122.7C777.1,96,800,128,823,165.3C845.7,203,869,245,891,224C914.3,203,937,117,960,112C982.9,107,1006,181,1029,197.3C1051.4,213,1074,171,1097,144C1120,117,1143,107,1166,133.3C1188.6,160,1211,224,1234,218.7C1257.1,213,1280,139,1303,133.3C1325.7,128,1349,192,1371,192C1394.3,192,1417,128,1429,96L1440,64L1440,320L0,320Z";
+function buildNotifCard(n){
+  const map={general:{cls:'wc-info'},info:{cls:'wc-info'},importante:{cls:'wc-warning'},urgente:{cls:'wc-danger'},celebracion:{cls:'wc-celebracion'}};
+  const wcIcons={info:`<path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>`,importante:`<path fill="currentColor" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>`,urgente:`<path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>`,celebracion:`<path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/>`};
+  const t=map[n.tipo]||map.info;
+  const icon=wcIcons[n.tipo]||wcIcons.info;
+  const uid='ntf-'+n.id;
+  if(dismissedNotifs.includes(uid))return'';
+  const imgHtml=n.imagen_url?`<img src="${escapeHtml(n.imagen_url)}" style="width:100%;border-radius:8px;margin-top:8px;max-height:160px;object-fit:cover;" loading="lazy" onerror="this.style.display='none'">`:'';
+  return `<div class="wave-card ${t.cls}" id="${uid}"><svg class="wave" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path d="${WAVE_SVG}"></path></svg><div class="wc-icon-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="wc-icon">${icon}</svg></div><div class="wc-text-container"><p class="wc-title">${escapeHtml(n.titulo)}</p><p class="wc-sub">${escapeHtml(n.mensaje)}</p>${imgHtml}</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" class="wc-close" onclick="dismissNotif('${uid}')"><path fill="currentColor" d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></div>`;
+}
+function dismissNotif(uid){
+  const el=document.getElementById(uid);
+  if(el){el.style.transition='opacity 0.3s';el.style.opacity='0';setTimeout(()=>el.remove(),300);}
+  if(!dismissedNotifs.includes(uid)){dismissedNotifs.push(uid);localStorage.setItem('alg_dismissed_ntf',JSON.stringify(dismissedNotifs));}
+}
+let showAllNotifs=false;
+async function loadHomeNotificaciones(){
+  const c=document.getElementById('home-notifications');if(!c)return;
+  try{
+    const notifs=await DB.getNotificaciones();
+    if(!notifs.length){c.innerHTML='';return;}
+    const visible=notifs.filter(n=>!dismissedNotifs.includes('ntf-'+n.id));
+    const show=showAllNotifs?visible:visible.slice(0,3);
+    c.innerHTML=show.map(n=>buildNotifCard(n)).join('');
+    const mb=document.getElementById('home-more-btn');
+    if(mb){
+      if(visible.length>3){mb.style.display='block';mb.textContent=showAllNotifs?'Ver menos':`Ver más (+${visible.length-3})`;}
+      else mb.style.display='none';
+    }
+  }catch(e){c.innerHTML='';}
+}
+async function toggleMoreNotifs(){
+  showAllNotifs=!showAllNotifs;
+  await loadHomeNotificaciones();
+}
+
+/* ── Notificaciones asociado (material UI) ── */
+function buildNotifAsociadoCard(n){
+  const map={pago_realizado:{cls:'ntf-success',icon:'✅'},factura_cancelada:{cls:'ntf-canceled',icon:'❌'},servicio_suspendido:{cls:'ntf-suspended',icon:'🚫'},factura_vencida:{cls:'ntf-expired',icon:'⏰'},nueva_factura:{cls:'ntf-invoice',icon:'📋'}};
+  const t=map[n.tipo]||{cls:'ntf-invoice',icon:'📢'};
+  return `<div class="${t.cls}" id="antf-${n.id}" onclick="marcarNotifLeida('${n.id}',this)" style="${n.leido?'opacity:0.75':''}"><div class="${t.cls}__icon" style="font-size:20px;margin-right:8px;flex-shrink:0;">${t.icon}</div><div class="${t.cls}__title">${!n.leido?'<strong>Nueva · </strong>':''}${escapeHtml(n.titulo)}<br><small style="font-weight:400;opacity:0.85;">${escapeHtml(n.mensaje.substring(0,80))}${n.mensaje.length>80?'...':''}</small></div><div class="${t.cls}__close" onclick="event.stopPropagation();this.closest('[class^=ntf]').style.display='none'" style="cursor:pointer;font-size:14px;margin-left:8px;flex-shrink:0;">✕</div></div>`;
+}
+function renderNotificacionesAsociado(notifs){
+  const panel=document.getElementById('av-notif-panel');if(!panel)return;
+  panel.innerHTML=notifs.length===0?'<p class="empty-msg">Sin notificaciones personales</p>':notifs.map(n=>buildNotifAsociadoCard(n)).join('');
+  const unread=notifs.filter(n=>!n.leido).length;
+  document.getElementById('av-notif-count').textContent=unread>0?`${unread} nuevas`:'Sin nuevas';
+}
+
+/* ── Config ── */
+async function openConfigPanel(){
+  const{data}=await getSupabase().from('configuracion').select('*');
+  const cfg={};if(data)data.forEach(d=>cfg[d.clave]=d.valor);
+  document.getElementById('cfg-tarifa').value=cfg.tarifa_m3||'2400';
+  document.getElementById('cfg-admin').value=cfg.administracion_mensual||'28000';
+  document.getElementById('cfg-admin-name').value=cfg.nombre_administrador||'';
+  document.getElementById('cfg-nit').value=cfg.nit||'';
+  if(AppState.cuentaBancaria){
+    document.getElementById('cfg-banco').value=AppState.cuentaBancaria.banco||'';
+    document.getElementById('cfg-tipo-cuenta').value=AppState.cuentaBancaria.tipo_cuenta||'';
+    document.getElementById('cfg-num-cuenta').value=AppState.cuentaBancaria.numero_cuenta||'';
+  }
+  document.getElementById('modal-config').classList.add('active');
+}
+async function saveConfig(){
+  showLoading(true);
+  try{
+    await Promise.all([DB.updateConfig('tarifa_m3',document.getElementById('cfg-tarifa').value),DB.updateConfig('administracion_mensual',document.getElementById('cfg-admin').value),DB.updateConfig('nombre_administrador',document.getElementById('cfg-admin-name').value),DB.updateConfig('nit',document.getElementById('cfg-nit').value)]);
+    if(AppState.cuentaBancaria)await DB.updateCuentaBancaria(AppState.cuentaBancaria.id,{banco:document.getElementById('cfg-banco').value,tipo_cuenta:document.getElementById('cfg-tipo-cuenta').value,numero_cuenta:document.getElementById('cfg-num-cuenta').value});
+    await loadConfig();showToast('Configuración guardada','success');document.getElementById('modal-config').classList.remove('active');
+  }catch(e){showToast('Error','error');}
+  finally{showLoading(false);}
+}
+
+/* ── Video admin ── */
+async function openVideoAdmin(){
+  const videos=await DB.getVideos();
+  document.getElementById('videos-list-admin').innerHTML=videos.length===0?'<p style="font-size:13px;color:var(--text-3);">Sin videos</p>':videos.map(v=>`<div class="list-item"><div class="li-info"><span class="li-name">${escapeHtml(v.titulo||v.url)}</span>${v.destacado?'<span class="status-badge status-pagada">Destacado</span>':''}</div><button class="btn-icon" onclick="deleteVideo('${v.id}')">🗑️</button></div>`).join('');
+  document.getElementById('va-url').value='';document.getElementById('va-titulo').value='';document.getElementById('va-destacado').checked=false;
+  document.getElementById('modal-video-admin').classList.add('active');
+}
+async function saveVideo(){
+  const url=document.getElementById('va-url').value.trim();if(!url){showToast('URL requerida','warning');return;}
+  showLoading(true);
+  try{await DB.createVideo({url,titulo:document.getElementById('va-titulo').value.trim(),destacado:document.getElementById('va-destacado').checked,activo:true});showToast('Video agregado','success');document.getElementById('modal-video-admin').classList.remove('active');loadHomeVideo();}
+  catch(e){showToast('Error','error');}finally{showLoading(false);}
+}
+async function deleteVideo(id){
+  const ok=await showGithubConfirm({title:'Eliminar Video',message:'Se eliminará el video.',confirmText:'ELIMINAR',dangerLabel:'Eliminar'});
+  if(!ok)return;
+  showLoading(true);try{await DB.deleteVideo(id);showToast('Eliminado','success');openVideoAdmin();}catch(e){showToast('Error','error');}finally{showLoading(false);}
+}
+
+/* ── Encuesta admin ── */
+function openFormEncuesta(id){
+  document.getElementById('enc-id').value=id||'';
+  document.getElementById('enc-pregunta').value='';document.getElementById('enc-opciones').value='';
+  document.getElementById('enc-inicio').value='';document.getElementById('enc-fin').value='';
+  document.getElementById('enc-modal-title').textContent=id?'Editar Encuesta':'Nueva Encuesta';
+  document.getElementById('modal-form-encuesta').classList.add('active');
+}
+async function saveEncuesta(){
+  const pregunta=document.getElementById('enc-pregunta').value.trim();
+  const opcionesText=document.getElementById('enc-opciones').value.trim();
+  if(!pregunta||!opcionesText){showToast('Pregunta y opciones requeridas','warning');return;}
+  const opciones=opcionesText.split('\n').map(o=>o.trim()).filter(Boolean);
+  showLoading(true);
+  try{await DB.createEncuesta({pregunta,opciones:JSON.stringify(opciones),activo:true,fecha_inicio:document.getElementById('enc-inicio').value||null,fecha_fin:document.getElementById('enc-fin').value||null,created_by:AppState.session?.id});showToast('Encuesta creada','success');document.getElementById('modal-form-encuesta').classList.remove('active');loadEncuestas();}
+  catch(e){showToast('Error','error');}finally{showLoading(false);}
+}
+
+/* ── Admin perfil ── */
+async function editAdminProfile(){
+  closeDrawer();if(!AppState.session)return;
+  const newName=prompt('Nombre del administrador:',AppState.session.nombre);
+  if(newName&&newName.trim()){
+    showLoading(true);
+    try{await DB.updateAsociado(AppState.session.id,{nombre:newName.trim()});AppState.session.nombre=newName.trim();saveSession(AppState.session);showToast('Nombre actualizado','success');}
+    catch(e){showToast('Error','error');}finally{showLoading(false);}
+  }
+}
+
+/* ── Survey float check ── */
+async function checkEncuestasFloat(){
+  try{const enc=await DB.getEncuestas();if(enc.length>0)document.getElementById('survey-float').style.display='block';}catch(e){}
+}
+
+/* ── History back ── */
+function historyBack(){
+  const back={'factura-ver':'tesoreria-facturas','recibo-ver':'tesoreria-recibos','factura-nueva':'tesoreria-facturas','recibo-nuevo':'tesoreria-recibos','tesoreria-asociados':'tesoreria','tesoreria-facturas':'tesoreria','tesoreria-recibos':'tesoreria','entradas':'tesoreria','salidas':'tesoreria','informes':'tesoreria','admin-notificaciones':'admin','admin-galeria':'admin','admin-contenido':'admin','asociado-view':'consultas','galeria':'home','medidores':'tesoreria','encuesta':'home','about':'home'};
+  navigateTo(back[AppState.currentScreen]||'home');
+}
+
+/* ── Override navigateTo ── */
+const _origNav=navigateTo;
+function navigateTo(screenId,params={}){
+  _origNav(screenId,params);
+  const titles={'home':'Acueducto Los Guaduales','consultas':'Consultas','asociado-view':'Mi Cuenta','tesoreria':'Tesorería','entradas':'Entradas','salidas':'Salidas','informes':'Informes','tesoreria-asociados':'Asociados','tesoreria-facturas':'Facturas','factura-nueva':'Nueva Factura','factura-ver':'Ver Factura','tesoreria-recibos':'Recibos','recibo-nuevo':'Nuevo Recibo','recibo-ver':'Ver Recibo','medidores':'Medidores','encuesta':'Encuestas','galeria':'Galería','admin':'Panel Admin','admin-notificaciones':'Notificaciones','admin-galeria':'Galería Admin','admin-contenido':'Contenido Destacado','about':'Acerca de'};
+  const backScreens=['factura-ver','recibo-ver','factura-nueva','recibo-nuevo','tesoreria-asociados','tesoreria-facturas','tesoreria-recibos','entradas','salidas','informes','admin-notificaciones','admin-galeria','admin-contenido','asociado-view','galeria','medidores'];
+  document.getElementById('header-title').textContent=titles[screenId]||'Acueducto Los Guaduales';
+  const logoEl=document.getElementById('header-logo');if(logoEl)logoEl.style.display=screenId==='home'?'block':'none';
+  const bb=document.getElementById('header-back-btn');if(bb)bb.classList.toggle('visible',backScreens.includes(screenId));
+  const fab=document.getElementById('home-edit-fab');if(fab)fab.style.display=(screenId==='home'&&isTesorero())?'block':'none';
+  if(screenId!=='encuesta')setTimeout(checkEncuestasFloat,1500);
+}
+
+/* ── Override loadScreen ── */
+const _origLoadScreen=loadScreen;
+function loadScreen(screenId,params={}){
+  const extras={'entradas':loadEntradas,'salidas':loadSalidas,'informes':loadInformes,'galeria':loadGaleria,'admin-galeria':loadAdminGaleria,'admin-contenido':()=>{loadDestacados().then(renderAdminContenido);}};
+  if(extras[screenId]){extras[screenId](params);return;}
+  _origLoadScreen(screenId,params);
+}
+
+/* ── Override loadHomeScreen for greeting ── */
+async function loadHomeScreen(){
+  const greeting=document.getElementById('home-greeting'),name=document.getElementById('home-name'),sub=document.getElementById('home-sub-greeting');
+  if(AppState.session){if(greeting)greeting.textContent=`${getGreeting()}, ${AppState.session.nombre}`;if(name)name.textContent=AppState.config.NOMBRE_ACUEDUCTO;if(sub)sub.textContent=`Rol: ${AppState.session.rol.charAt(0).toUpperCase()+AppState.session.rol.slice(1)}`;}
+  else if(AppState.asociado){if(greeting)greeting.textContent=`${getGreeting()}, ${AppState.asociado.nombre}`;if(name)name.textContent=AppState.config.NOMBRE_ACUEDUCTO;if(sub)sub.textContent='Asociado · Acueducto Los Guaduales';}
+  else{if(greeting)greeting.textContent='💧 Acueducto Los Guaduales';if(name)name.textContent='';if(sub)sub.textContent='"la semilla del futuro"';}
+  await loadHomeNotificaciones();
+  await loadHomeGaleria();
+  await loadHomeVideo();
+  await loadDestacados();
+}
+
+/* ── DOMContentLoaded extras ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(checkEncuestasFloat,3000);
+  // floating label behavior for consultas
+  document.querySelectorAll('.input-block .input').forEach(input=>{
+    const lbl=input.nextElementSibling;if(!lbl||lbl.tagName!=='LABEL')return;
+    const update=()=>lbl.style.cssText=input.value?'top:2px;font-size:11px;color:#1565C0;':'';
+    input.addEventListener('focus',()=>lbl.style.cssText='top:2px;font-size:11px;color:#1565C0;');
+    input.addEventListener('blur',update);input.addEventListener('input',update);
+  });
+});
+</script>
+</body>
+</html>
