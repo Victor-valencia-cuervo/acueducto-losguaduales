@@ -1492,8 +1492,8 @@ function historyBack(){
 }
 
 /* ── Override navigateTo ── */
-const _origNav=navigateTo;
-function navigateTo(screenId,params={}){
+const _origNav=window.navigateTo;
+window.navigateTo=function(screenId,params={}){
   _origNav(screenId,params);
   const titles={'home':'Acueducto Los Guaduales','consultas':'Consultas','asociado-view':'Mi Cuenta','tesoreria':'Tesorería','entradas':'Entradas','salidas':'Salidas','informes':'Informes','tesoreria-asociados':'Asociados','tesoreria-facturas':'Facturas','factura-nueva':'Nueva Factura','factura-ver':'Ver Factura','tesoreria-recibos':'Recibos','recibo-nuevo':'Nuevo Recibo','recibo-ver':'Ver Recibo','medidores':'Medidores','encuesta':'Encuestas','galeria':'Galería','admin':'Panel Admin','admin-notificaciones':'Notificaciones','admin-galeria':'Galería Admin','admin-contenido':'Contenido Destacado','about':'Acerca de'};
   const backScreens=['factura-ver','recibo-ver','factura-nueva','recibo-nuevo','tesoreria-asociados','tesoreria-facturas','tesoreria-recibos','entradas','salidas','informes','admin-notificaciones','admin-galeria','admin-contenido','asociado-view','galeria','medidores'];
@@ -1505,8 +1505,8 @@ function navigateTo(screenId,params={}){
 }
 
 /* ── Override loadScreen ── */
-const _origLoadScreen=loadScreen;
-function loadScreen(screenId,params={}){
+const _origLoadScreen=window.loadScreen;
+window.loadScreen=function(screenId,params={}){
   const extras={'entradas':loadEntradas,'salidas':loadSalidas,'informes':loadInformes,'galeria':loadGaleria,'admin-galeria':loadAdminGaleria,'admin-contenido':()=>{loadDestacados().then(renderAdminContenido);}};
   if(extras[screenId]){extras[screenId](params);return;}
   _origLoadScreen(screenId,params);
