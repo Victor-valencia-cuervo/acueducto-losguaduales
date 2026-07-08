@@ -6,7 +6,7 @@
 const SUPABASE_URL = 'https://ujgvxqfqtzznonplwiac.supabase.co';
 // Clave publicable (anon key) - obtenida del dashboard de Supabase
 // Si esta clave no funciona, ve a: Supabase Dashboard > Settings > API > anon public
-const SUPABASE_KEY = 'sb_publishable_fK1dhYLRkWq7VzQ64rll-Q_CL4GOPX3';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlqbXNvdnRqZ2l6YmtvZ2xqYWhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyNTUxMTAsImV4cCI6MjA5ODgzMTExMH0.-GgHLQvsGsneTT6B0YWtxWFz57xWGjTfoFLJsm5ZY2A';
 
 // Inicializar cliente Supabase
 let supabaseClient = null;
